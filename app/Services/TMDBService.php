@@ -33,7 +33,13 @@ class TMDBService
         return $this->get("/movie/{$movieId}/credits?");
     }
 
-    // Parse director từ credits
+    // Lấy danh sách video (Trailer, Clip, Teaser) — *** HÀM BẠN THIẾU ***
+    public function getMovieVideos($movieId)
+    {
+        return $this->get("/movie/{$movieId}/videos?");
+    }
+
+    // Lấy tên đạo diễn
     public function getDirector($credits)
     {
         if (empty($credits["crew"])) return null;
@@ -46,7 +52,7 @@ class TMDBService
         return null;
     }
 
-    // Parse genre → array tên thể loại
+    // Parse genres → array tên
     public function getGenres($detail)
     {
         if (empty($detail["genres"])) return [];
@@ -54,7 +60,7 @@ class TMDBService
         return array_map(fn($g) => $g["name"], $detail["genres"]);
     }
 
-    // Tạo URL poster TMDB
+    // Lấy link poster TMDB
     public function getPosterUrl($path, $size = "w500")
     {
         if (!$path) return null;

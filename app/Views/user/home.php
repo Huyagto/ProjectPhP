@@ -7,18 +7,7 @@
     <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp6220893.jpg');"></div>
     <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp5739890.jpg');"></div>
 </div>
-
-<script>
-let index = 0;
-const slides = document.querySelectorAll('.slide');
-
-setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-}, 4500);
-</script>
-
+<script src="<?= BASE_URL ?>/assets/js/home-user.js"></script>
 <!-- TOP 10 -->
 <h2 class="section-title">🏆 Top 10 hôm nay</h2>
 

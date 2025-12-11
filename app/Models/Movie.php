@@ -155,4 +155,11 @@ class Movie
 
         return $pdo->lastInsertId();
     }
+    public static function count()
+{
+    global $pdo;
+
+    $stmt = $pdo->query("SELECT COUNT(*) FROM movies");
+    return (int)$stmt->fetchColumn();
+}
 }
