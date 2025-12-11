@@ -1,70 +1,76 @@
-<?php require __DIR__."/../layout/header.php"; ?>
-<form action="<?= BASE_URL ?>/search" method="GET">
-    <input type="text" name="q" placeholder="Tìm phim..." 
-           style="padding:6px 10px; border-radius:6px;">
-</form>
+<?php require __DIR__."/../layout/user.php"; ?>
 
-<style>
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 22px;
-    padding: 30px 40px;
-}
-.movie-card {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform .25s ease;
-}
-.movie-card:hover {
-    transform: scale(1.12);
-}
-.movie-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-}
-.movie-info {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-    opacity: 0;
-    transition: .3s;
-}
-.movie-card:hover .movie-info { opacity: 1; }
-.movie-title { font-weight: bold; font-size: 16px; }
-.movie-year { font-size: 12px; color:#ccc; }
-</style>
+<!-- HERO SLIDER -->
+<div class="hero-slider">
+    <div class="slide active" style="background-image: url('https://wallpapercave.com/wp/wp8814978.jpg');"></div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp7997552.jpg');"></div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp6220893.jpg');"></div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp5739890.jpg');"></div>
+</div>
 
-<h2 style="color:white; margin-left:40px;">🔥 Phim mới</h2>
+<script>
+let index = 0;
+const slides = document.querySelectorAll('.slide');
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 4500);
+</script>
+
+<!-- TOP 10 -->
+<h2 class="section-title">🏆 Top 10 hôm nay</h2>
+
+<div class="top10-row">
+<?php foreach (array_slice($movies, 0, 10) as $i => $m): ?>
+
+    <?php 
+        $poster = str_starts_with($m["poster"], "/")
+            ? "https://image.tmdb.org/t/p/w500{$m['poster']}"
+            : BASE_URL . "/uploads/" . $m["poster"];
+    ?>
+
+    <div class="top10-card">
+        <div class="rank"><?= $i+1 ?></div>
+        <img src="<?= $poster ?>">
+    </div>
+
+<?php endforeach; ?>
+</div>
+
+
+<!-- MOVIE GRID -->
+<h2 class="section-title">🔥 Phim mới cập nhật</h2>
 
 <div class="movie-grid">
 
 <?php foreach ($movies as $m): ?>
 
     <?php 
-        $poster = $m["poster"]
-            ? (str_starts_with($m["poster"], "/") 
-                ? "https://image.tmdb.org/t/p/w500{$m['poster']}" 
-                : BASE_URL . "/uploads/" . $m["poster"])
-            : BASE_URL . "/assets/img/no-image.png";
+        $poster = str_starts_with($m["poster"], "/")
+            ? "https://image.tmdb.org/t/p/w500{$m['poster']}"
+            : BASE_URL . "/uploads/" . $m["poster"];
     ?>
 
     <a href="<?= BASE_URL ?>/movie/<?= $m['id'] ?>" class="movie-card">
         <img src="<?= $poster ?>">
-        <div class="movie-info">
+
+        <div class="preview-popup">
             <div class="movie-title"><?= $m['title'] ?></div>
             <div class="movie-year"><?= $m['year'] ?></div>
+            <div class="movie-extra">⭐ <?= $m['rating'] ?? "Chưa có đánh giá" ?></div>
         </div>
     </a>
 
 <?php endforeach; ?>
 
 </div>
+</div> <!-- end nf-content -->
 
-<?php require __DIR__."/../layout/footer.php"; ?>
+<footer class="nf-footer">
+    MovieFlix © <?= date("Y") ?>
+</footer>
 
+</body>
+</html>

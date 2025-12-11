@@ -1,10 +1,12 @@
 <?php
 namespace Models;
 
+use PDO;
+
 class Movie
 {
     /* ============================
-       LẤY DANH SÁCH PHIM + AUTHORS + CATEGORIES
+       LẤY TOÀN BỘ PHIM
        ============================ */
     public static function all()
     {
@@ -23,8 +25,9 @@ class Movie
             ORDER BY m.id DESC
         ";
 
-        return $pdo->query($sql)->fetchAll();
+        return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     /* ============================
        LẤY 1 PHIM THEO ID
@@ -49,77 +52,47 @@ class Movie
         $stm = $pdo->prepare($sql);
         $stm->execute([$id]);
 
-        return $stm->fetch();
+        return $stm->fetch(PDO::FETCH_ASSOC);
     }
 
+
     /* ============================
-       CREATE MOVIE
+       PHIM LIÊN QUAN (cùng categories)
        ============================ */
-    public static function create($title, $description, $year, $poster, $author_id)
+    public static function getRelated($categoriesString, $excludeId)
     {
         global $pdo;
 
-        $stm = $pdo->prepare("
-            INSERT INTO movies (title, description, year, poster, author_id)
-            VALUES (?, ?, ?, ?, ?)
-        ");
+        // categoriesString = "Action, Drama"
+        if (!$categoriesString) return [];
 
-        $stm->execute([$title, $description, $year, $poster, $author_id]);
+        $categories = explode(", ", $categoriesString);
 
-        return $pdo->lastInsertId();
-    }
-
-    /* ============================
-       UPDATE MOVIE
-       ============================ */
-    public static function update($id, $title, $description, $year, $poster, $author_id)
-    {
-        global $pdo;
-
-        if ($poster) {
-            $sql = "UPDATE movies SET title=?, description=?, year=?, poster=?, author_id=? WHERE id=?";
-            return $pdo->prepare($sql)->execute([$title, $description, $year, $poster, $author_id, $id]);
-        } else {
-            $sql = "UPDATE movies SET title=?, description=?, year=?, author_id=? WHERE id=?";
-            return $pdo->prepare($sql)->execute([$title, $description, $year, $author_id, $id]);
-        }
-    }
-
-    /* ============================
-       DELETE
-       ============================ */
-    public static function delete($id)
-    {
-        global $pdo;
-
-        // xóa liên kết categories
-        $pdo->prepare("DELETE FROM movie_category WHERE movie_id = ?")->execute([$id]);
-
-        return $pdo->prepare("DELETE FROM movies WHERE id = ?")->execute([$id]);
-    }
-
-    /* ============================
-       LẤY CATEGORY CỦA 1 MOVIE
-       ============================ */
-    public static function getCategories($movie_id)
-    {
-        global $pdo;
+        // Tạo placeholders ?, ?, ?
+        $placeholders = implode(",", array_fill(0, count($categories), "?"));
 
         $sql = "
-            SELECT c.*
-            FROM categories c
-            JOIN movie_category mc ON c.id = mc.category_id
-            WHERE mc.movie_id = ?
+            SELECT DISTINCT m.*
+            FROM movies m
+            LEFT JOIN movie_category mc ON m.id = mc.movie_id
+            LEFT JOIN categories c ON c.id = mc.category_id
+            WHERE c.name IN ($placeholders)
+            AND m.id != ?
+            LIMIT 10
         ";
 
         $stm = $pdo->prepare($sql);
-        $stm->execute([$movie_id]);
 
-        return $stm->fetchAll();
+        $params = array_merge($categories, [$excludeId]);
+
+        $stm->execute($params);
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     /* ============================
-       SEARCH
+       SEARCH MOVIE
        ============================ */
     public static function search($keyword)
     {
@@ -138,163 +111,48 @@ class Movie
             LEFT JOIN categories c ON c.id = mc.category_id
             WHERE m.title LIKE ? OR m.description LIKE ?
             GROUP BY m.id
-            ORDER BY m.id DESC
         ";
 
         $stm = $pdo->prepare($sql);
         $stm->execute([$key, $key]);
 
-        return $stm->fetchAll();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     /* ============================
-       GÁN CATEGORY CHO MOVIE
+       Kiểm tra TMDB ID tồn tại
        ============================ */
-    public static function syncCategories($movie_id, $category_ids)
+    public static function existsWithTMDB($tmdb_id)
+    {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id FROM movies WHERE tmdb_id = ?");
+        $stmt->execute([$tmdb_id]);
+        return $stmt->fetchColumn();
+    }
+
+
+    /* ============================
+       Tạo movie từ TMDB
+       ============================ */
+    public static function createFromTMDB($detail, $tmdb_id, $author_id)
     {
         global $pdo;
 
-        $pdo->prepare("DELETE FROM movie_category WHERE movie_id=?")->execute([$movie_id]);
+        $stmt = $pdo->prepare("
+            INSERT INTO movies (tmdb_id, title, description, year, poster, author_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
 
-        $stm = $pdo->prepare("INSERT INTO movie_category (movie_id, category_id) VALUES (?, ?)");
+        $stmt->execute([
+            $tmdb_id,
+            $detail["title"],
+            $detail["overview"],
+            substr($detail["release_date"] ?? "0000", 0, 4),
+            $detail["poster_path"],
+            $author_id
+        ]);
 
-        foreach ($category_ids as $cat_id) {
-            $stm->execute([$movie_id, $cat_id]);
-        }
+        return $pdo->lastInsertId();
     }
-
-    /* ============================
-       COUNT MOVIE
-       ============================ */
-    public static function count()
-    {
-        global $pdo;
-        return $pdo->query("SELECT COUNT(*) FROM movies")->fetchColumn();
-    }
-
-    /* ============================
-       TMDB AUTO FETCH (Full: movie + author + genres)
-       ============================ */
-    public static function autoFetchFullFromTMDB()
-    {
-        global $pdo;
-
-        $apiKey = "af69a70274d4ddc4b8bd3ce03b195744";
-        $url = "https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=vi-VN&page=1";
-
-        $json = @file_get_contents($url);
-        if (!$json) return;
-
-        $data = json_decode($json, true);
-        if (!isset($data["results"])) return;
-
-        foreach ($data["results"] as $movie) {
-
-            $tmdb_id = $movie["id"];
-
-            // Kiểm tra trùng
-            $check = $pdo->prepare("SELECT id FROM movies WHERE tmdb_id=? LIMIT 1");
-            $check->execute([$tmdb_id]);
-
-            if ($check->fetch()) continue;
-
-            // Lấy chi tiết phim
-            $detail = json_decode(@file_get_contents(
-                "https://api.themoviedb.org/3/movie/$tmdb_id?api_key=$apiKey&language=vi-VN"
-            ), true);
-
-            // Lấy credit để tìm đạo diễn
-            $credits = json_decode(@file_get_contents(
-                "https://api.themoviedb.org/3/movie/$tmdb_id/credits?api_key=$apiKey"
-            ), true);
-
-            // Tìm director
-            $director = null;
-            if (!empty($credits["crew"])) {
-                foreach ($credits["crew"] as $c) {
-                    if ($c["job"] === "Director") {
-                        $director = $c["name"];
-                        break;
-                    }
-                }
-            }
-
-            // Insert author nếu chưa có
-            $author_id = null;
-            if ($director) {
-                $stmt = $pdo->prepare("SELECT id FROM authors WHERE name=? LIMIT 1");
-                $stmt->execute([$director]);
-                $exist = $stmt->fetchColumn();
-
-                if ($exist) {
-                    $author_id = $exist;
-                } else {
-                    $pdo->prepare("INSERT INTO authors (name) VALUES (?)")->execute([$director]);
-                    $author_id = $pdo->lastInsertId();
-                }
-            }
-
-            // Insert movie
-            $pdo->prepare("
-                INSERT INTO movies (tmdb_id, title, description, year, poster, author_id)
-                VALUES (?, ?, ?, ?, ?, ?)
-            ")
-            ->execute([
-                $tmdb_id,
-                $detail["title"] ?? "",
-                $detail["overview"] ?? "",
-                substr($detail["release_date"] ?? "0000", 0, 4),
-                $detail["poster_path"] ?? null,
-                $author_id
-            ]);
-
-            $movie_id = $pdo->lastInsertId();
-
-            // Gán categories (genres)
-            if (!empty($detail["genres"])) {
-                foreach ($detail["genres"] as $g) {
-
-                    // Tìm category
-                    $stmt = $pdo->prepare("SELECT id FROM categories WHERE name=?");
-                    $stmt->execute([$g["name"]]);
-                    $cat_id = $stmt->fetchColumn();
-
-                    if (!$cat_id) {
-                        $pdo->prepare("INSERT INTO categories (name) VALUES (?)")->execute([$g["name"]]);
-                        $cat_id = $pdo->lastInsertId();
-                    }
-
-                    $pdo->prepare("INSERT INTO movie_category (movie_id, category_id) VALUES (?, ?)")
-                        ->execute([$movie_id, $cat_id]);
-                }
-            }
-        }
-    }
-    public static function existsWithTMDB($tmdb_id) {
-    global $pdo;
-    $stmt = $pdo->prepare("SELECT id FROM movies WHERE tmdb_id = ?");
-    $stmt->execute([$tmdb_id]);
-    return $stmt->fetchColumn();
-}
-
-public static function createFromTMDB($detail, $tmdb_id, $author_id) {
-    global $pdo;
-
-    $stmt = $pdo->prepare("
-        INSERT INTO movies (tmdb_id, title, description, year, poster, author_id)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ");
-
-    $stmt->execute([
-        $tmdb_id,
-        $detail["title"],
-        $detail["overview"],
-        substr($detail["release_date"] ?? "0000", 0, 4),
-        $detail["poster_path"],
-        $author_id
-    ]);
-
-    return $pdo->lastInsertId();
-}
-
 }

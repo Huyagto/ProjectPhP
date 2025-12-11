@@ -18,9 +18,6 @@ class Controller {
 
     require __DIR__ . '/../Views/layout/admin.php';
 }
-
-
-
     protected function redirect($url) {
         header("Location: $url");
         exit;
