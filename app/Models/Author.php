@@ -1,0 +1,62 @@
+<?php
+namespace Models;
+
+class Author
+{
+    public static function all()
+    {
+        global $pdo;
+        return $pdo->query("SELECT * FROM authors ORDER BY name ASC")->fetchAll();
+    }
+
+    public static function find($id)
+    {
+        global $pdo;
+        $stm = $pdo->prepare("SELECT * FROM authors WHERE id=?");
+        $stm->execute([$id]);
+        return $stm->fetch();
+    }
+
+    public static function create($name)
+    {
+        global $pdo;
+        return $pdo->prepare("INSERT INTO authors (name) VALUES (?)")->execute([$name]);
+    }
+
+    public static function update($id, $name)
+    {
+        global $pdo;
+        return $pdo->prepare("UPDATE authors SET name=? WHERE id=?")->execute([$name, $id]);
+    }
+
+    public static function delete($id)
+    {
+        global $pdo;
+
+        // Xóa liên kết author với phim
+        $pdo->prepare("UPDATE movies SET author_id=NULL WHERE author_id=?")
+            ->execute([$id]);
+
+        return $pdo->prepare("DELETE FROM authors WHERE id=?")->execute([$id]);
+    }
+    public static function firstOrCreate($name)
+{
+    if (!$name) return null;
+
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT id FROM authors WHERE name = ?");
+    $stmt->execute([$name]);
+    $id = $stmt->fetchColumn();
+
+    if ($id) return $id;
+
+    $pdo->prepare("INSERT INTO authors (name) VALUES (?)")->execute([$name]);
+    return $pdo->lastInsertId();
+}
+public static function count() {
+    global $pdo;
+    return $pdo->query("SELECT COUNT(*) FROM authors")->fetchColumn();
+}
+
+}

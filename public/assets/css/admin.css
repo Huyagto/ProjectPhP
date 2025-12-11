@@ -1,0 +1,244 @@
+/* =======================================
+   MOVIE PAGE (Index + Create + Edit)
+   Unified Netflix Admin Style
+==========================================*/
+
+:root {
+    --bg: #0b0b0b;
+    --panel: #131416;
+    --surface: #101113;
+    --accent: #e50914;
+    --text: #e8e8e8;
+    --muted: #b3b3b3;
+}
+
+/* GLOBAL INPUT + BUTTONS */
+.input, 
+.input-parent,
+.textarea,
+.select {
+    background: #131416;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: white;
+    transition: 0.2s ease;
+    box-shadow: 0 0 16px rgba(255, 0, 0, 0.25);
+}
+.input:focus,
+.input-parent:focus,
+.textarea:focus,
+.select:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 6px rgba(229,9,20,0.4);
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+    display: inline-block;
+    box-shadow: 0 0 16px rgba(255, 0, 0, 0.25);
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: #b20710; }
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+}
+.btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.btn.small { padding: 6px 10px; font-size: 13px; }
+.btn.danger { background: #b71c1c !important; box-shadow: 0 0 16px rgba(255, 0, 0, 0.25);}
+.btn.danger,
+.btn.danger:link,
+.btn.danger:visited {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.btn.danger:hover {
+    background: #d00000 !important;
+    color: #fff !important;
+}
+
+/* =====================================================
+   PAGE TITLE (INDEX + FORM)
+======================================================= */
+.page-title-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.page-title {
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.page-title i {
+    color: var(--accent);
+    font-size: 28px;
+}
+
+/* =====================================================
+   SEARCH BAR (INDEX PAGE)
+======================================================= */
+.search-row { margin-bottom: 20px; }
+.search-form { display: flex; gap: 10px; }
+
+/* =====================================================
+   MOVIE TABLE (INDEX PAGE)
+======================================================= */
+.card.table-card {
+    background: var(--panel);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 0 16px rgba(255, 0, 0, 0.25);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+.table thead {
+    background: #181818;
+}
+.table th {
+    padding: 14px;
+    text-align: left;
+    color: #ccc;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 14px;
+}
+.table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.table tbody tr:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+/* Poster in table */
+.poster-img {
+    width: 60px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    transition: .2s ease;
+}
+.poster-img:hover {
+    transform: scale(1.12);
+}
+
+/* Action buttons */
+.action-cell {
+    display: flex;
+    gap: 6px;
+}
+
+/* Category text (optional badge style) */
+.category-badge {
+    background: rgba(255,255,255,0.08);
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-right: 4px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+/* =====================================================
+   MOVIE FORM (CREATE + EDIT)
+======================================================= */
+.form-card {
+    background: var(--panel);
+    padding: 32px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+    max-width: 800px;
+}
+.form-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+.form-title i {
+    color: var(--accent);
+    font-size: 30px;
+}
+
+/* Form Inputs */
+.form-card label {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+.input-parent, .textarea, .select {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: #0c0c0d;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px;
+    font-size: 15px;
+}
+
+/* Category checkbox grid */
+.list {
+    background: var(--surface);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 26px;
+}
+.list label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.list input {
+    transform: scale(1.3);
+    accent-color: var(--accent);
+}
+
+/* Poster preview */
+.poster-preview {
+    width: 140px;
+    border-radius: 10px;
+    margin: 10px 0 20px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.45);
+}
+
+/* Submit button */
+.btn-submit {
+    background: var(--accent);
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+.btn-submit:hover {
+    background: #ff1a22;
+}

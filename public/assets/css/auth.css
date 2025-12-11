@@ -1,0 +1,134 @@
+/* ===== BODY CHUNG CHO LOGIN & REGISTER ===== */
+body {
+    margin: 0;
+    background: #222;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+.search-row { margin-bottom: 20px; }
+.search-form { display: flex; gap: 10px; }
+.input, 
+.movie-input,
+.movie-textarea,
+.movie-select {
+    background: #131416;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: white;
+    transition: 0.2s ease;
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: #b20710; }
+
+.input:focus,
+/* ===== FRAME CHÍNH ===== */
+.auth-wrapper {
+    width: 450px;
+    padding: 35px;
+    background: rgba(0,0,0,0.92);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    animation: fadeIn 0.7s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+}
+.btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+}
+.auth-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* ===== INPUT GROUP ===== */
+.input-group {
+    margin-top: 18px;
+    position: relative;
+}
+
+.input-group input {
+    width: 85%;
+    padding: 13px 14px 13px 42px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    background: #e9edf6;
+    outline: none;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 17px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn:hover { background: #b20710; }
+
+/* ===== TEXT LINK ===== */
+.bottom-text {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+}
+.bottom-text a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+.bottom-text a:hover { text-decoration: underline; }
+
+/* ===== ERROR ===== */
+.error {
+    background: #ff3333;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* ===== NÚT TRANG CHỦ ===== */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    transition: 0.2s;
+}
+.home-btn:hover { background: rgba(255,255,255,0.3); }

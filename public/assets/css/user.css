@@ -1,0 +1,110 @@
+body {
+    background: #0f0f0f;
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 94%;
+    margin: auto;
+}
+
+.header {
+    background: #7d0040;
+    padding: 14px 0;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.username {
+    font-weight: 600;
+}
+
+.logout,
+.login {
+    color: #ffd5f5;
+    text-decoration: none;
+}
+
+.section-title {
+    margin-left: 40px;
+    margin-top: 25px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 22px;
+    padding: 30px 40px;
+}
+
+.movie-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .25s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.12);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    opacity: 0;
+    transition: .3s;
+}
+
+.movie-card:hover .movie-info {
+    opacity: 1;
+}
+
+.footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    background: #111;
+    color: #aaa;
+}
