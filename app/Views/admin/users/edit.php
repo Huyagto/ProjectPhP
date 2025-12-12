@@ -18,7 +18,20 @@
         <label>Email</label>
         <input type="email" name="email" class="input-parent"
                value="<?= htmlspecialchars($user['email']) ?>" required>
+        <label>Display Name</label>
+<input type="text" name="display_name" class="input-parent" value="<?= $user['display_name'] ?>">
 
+<label>Avatar</label>
+<select name="avatar">
+    <?php foreach ($avatars as $av): ?>
+        <option value="<?= $av ?>" <?= $user['avatar'] === $av ? 'selected' : '' ?>>
+            <?= $av ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
+<img src="<?= BASE_URL ?>/assets/img/<?= $user["avatar"] ?>" 
+     style="width:80px;border-radius:50%;margin-top:10px;">
         <label>Password mới</label>
         <input type="password" name="password" class="input-parent" placeholder="Để trống nếu không đổi">
 

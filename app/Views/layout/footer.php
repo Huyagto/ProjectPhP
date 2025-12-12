@@ -1,3 +1,3 @@
 <footer class="footer">
-    MovieFlix © 2025
+    MovieFlix © <?= date("Y") ?>
 </footer>

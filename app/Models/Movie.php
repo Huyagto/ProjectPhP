@@ -3,15 +3,10 @@ namespace Models;
 
 use PDO;
 
-class Movie
+class Movie extends BaseModel
 {
-    /**
-     * Lấy toàn bộ movie (kèm author name + danh sách categories dưới dạng chuỗi)
-     */
     public static function all()
     {
-        global $pdo;
-
         $sql = "
             SELECT 
                 m.*,
@@ -25,16 +20,11 @@ class Movie
             ORDER BY m.id DESC
         ";
 
-        return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return self::$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Tìm movie theo id (chi tiết)
-     */
     public static function find($id)
     {
-        global $pdo;
-
         $sql = "
             SELECT 
                 m.*,
@@ -48,18 +38,14 @@ class Movie
             GROUP BY m.id
         ";
 
-        $stm = $pdo->prepare($sql);
+        $stm = self::$pdo->prepare($sql);
         $stm->execute([$id]);
+
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Tìm kiếm theo tiêu đề (dùng trong listing admin)
-     */
     public static function search($keyword)
     {
-        global $pdo;
-
         $sql = "
             SELECT 
                 m.*, 
@@ -74,36 +60,26 @@ class Movie
             ORDER BY m.id DESC
         ";
 
-        $stm = $pdo->prepare($sql);
-        $stm->execute(['%' . $keyword . '%']);
+        $stm = self::$pdo->prepare($sql);
+        $stm->execute(["%$keyword%"]);
+
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Tạo movie mới (trả về movie_id)
-     */
     public static function create($title, $desc, $year, $poster, $author_id)
     {
-        global $pdo;
-
-        $stmt = $pdo->prepare("
+        $stmt = self::$pdo->prepare("
             INSERT INTO movies (title, description, year, poster, author_id)
             VALUES (?, ?, ?, ?, ?)
         ");
 
         $stmt->execute([$title, $desc, $year, $poster, $author_id]);
 
-        return $pdo->lastInsertId();
+        return self::$pdo->lastInsertId();
     }
 
-    /**
-     * Cập nhật movie
-     * Nếu $poster = null => giữ poster cũ
-     */
     public static function update($id, $title, $desc, $year, $poster, $author_id)
     {
-        global $pdo;
-
         if ($poster) {
             $sql = "
                 UPDATE movies 
@@ -120,100 +96,60 @@ class Movie
             $params = [$title, $desc, $year, $author_id, $id];
         }
 
-        $stmt = $pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
         return $stmt->execute($params);
     }
 
-    /**
-     * Xóa movie (cùng với liên kết movie_category)
-     */
     public static function delete($id)
     {
-        global $pdo;
+        self::$pdo->prepare("DELETE FROM movie_category WHERE movie_id = ?")
+                  ->execute([$id]);
 
-        // xóa quan hệ pivot trước
-        $pdo->prepare("DELETE FROM movie_category WHERE movie_id = ?")
-            ->execute([$id]);
-
-        // xóa movie
-        $stmt = $pdo->prepare("DELETE FROM movies WHERE id = ?");
+        $stmt = self::$pdo->prepare("DELETE FROM movies WHERE id = ?");
         return $stmt->execute([$id]);
     }
 
-    /**
-     * Lấy mảng category_id của movie
-     * Trả về dạng [1, 2, 5] hoặc [] nếu không có
-     */
-public static function getCategories($movie_id)
-{
-    global $pdo;
+    public static function getCategories($movie_id)
+    {
+        $stmt = self::$pdo->prepare("
+            SELECT category_id
+            FROM movie_category
+            WHERE movie_id = ?
+        ");
 
-    $stmt = $pdo->prepare("
-        SELECT category_id
-        FROM movie_category
-        WHERE movie_id = ?
-    ");
-    $stmt->execute([$movie_id]);
+        $stmt->execute([$movie_id]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return array_column($rows, "category_id");
+    }
 
-    return array_column($rows, "category_id");
-}
-
-
-
-    /**
-     * Đồng bộ categories: xóa các category cũ, chèn category mới
-     * Nhận $category_ids là mảng (có thể rỗng)
-     */
     public static function syncCategories($movie_id, $category_ids)
     {
-        global $pdo;
+        self::$pdo->prepare("DELETE FROM movie_category WHERE movie_id = ?")
+                  ->execute([$movie_id]);
 
-        // Xóa tất cả liên kết cũ
-        $pdo->prepare("DELETE FROM movie_category WHERE movie_id = ?")
-            ->execute([$movie_id]);
+        if (empty($category_ids)) return;
 
-        // Nếu không có category mới thì dừng
-        if (empty($category_ids)) {
-            return;
-        }
-
-        // Thêm mới (prepared once for performance)
-        $stmt = $pdo->prepare("
+        $stmt = self::$pdo->prepare("
             INSERT INTO movie_category (movie_id, category_id)
             VALUES (?, ?)
         ");
 
         foreach ($category_ids as $cid) {
-            // ensure integer
             $stmt->execute([$movie_id, (int)$cid]);
         }
     }
 
-    /**
-     * Kiểm tra tồn tại theo tmdb_id (dùng khi import từ TMDB)
-     * Trả về id nếu tồn tại, false/null nếu không
-     */
     public static function existsWithTMDB($tmdb_id)
     {
-        global $pdo;
-
-        $stmt = $pdo->prepare("SELECT id FROM movies WHERE tmdb_id = ?");
+        $stmt = self::$pdo->prepare("SELECT id FROM movies WHERE tmdb_id = ?");
         $stmt->execute([$tmdb_id]);
         return $stmt->fetchColumn();
     }
 
-    /**
-     * Tạo movie từ dữ liệu TMDB (dùng khi import)
-     * Trả về new movie id
-     * $data phải chứa keys tương ứng: tmdb_id, title, overview, year, release_date, poster, backdrop, rating, duration, trailer, author_id
-     */
     public static function createFromTMDB($data)
     {
-        global $pdo;
-
-        $stmt = $pdo->prepare("
+        $stmt = self::$pdo->prepare("
             INSERT INTO movies 
                 (tmdb_id, title, description, year, release_date, poster, backdrop, rating, duration, trailer, author_id, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
@@ -233,20 +169,14 @@ public static function getCategories($movie_id)
             $data["author_id"] ?? null
         ]);
 
-        return $pdo->lastInsertId();
+        return self::$pdo->lastInsertId();
     }
 
-    /**
-     * Lấy movie liên quan theo tên categories (trả về tối đa limit)
-     * $categoriesString là chuỗi ví dụ "Action, Comedy"
-     */
     public static function getRelated($categoriesString, $excludeId, $limit = 10)
     {
-        global $pdo;
-
         if (!$categoriesString) return [];
 
-        $categories = array_map('trim', explode(",", $categoriesString));
+        $categories = array_map("trim", explode(",", $categoriesString));
         $placeholders = implode(",", array_fill(0, count($categories), "?"));
 
         $sql = "
@@ -259,92 +189,133 @@ public static function getCategories($movie_id)
             LIMIT ?
         ";
 
-        $stm = $pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
+
         $params = array_merge($categories, [$excludeId, $limit]);
-        $stm->execute($params);
 
-        return $stm->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public static function count()
-{
-    global $pdo;
-    return $pdo->query("SELECT COUNT(*) FROM movies")->fetchColumn();
-}
-public static function createFull($title, $desc, $year, $poster, $backdrop, $author_id)
-{
-    global $pdo;
-
-    $stmt = $pdo->prepare("
-        INSERT INTO movies (title, description, year, poster, backdrop, author_id)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ");
-
-    $stmt->execute([$title, $desc, $year, $poster, $backdrop, $author_id]);
-
-    return $pdo->lastInsertId();
-}
-
-public static function filter($search, $category, $author, $year)
-{
-    global $pdo;
-
-    $sql = "
-        SELECT m.*, a.name AS author_name,
-               GROUP_CONCAT(c.name SEPARATOR ', ') AS categories
-        FROM movies m
-        LEFT JOIN authors a ON a.id = m.author_id
-        LEFT JOIN movie_category mc ON mc.movie_id = m.id
-        LEFT JOIN categories c ON c.id = mc.category_id
-        WHERE 1
-    ";
-
-    $params = [];
-
-    if ($search) {
-        $sql .= " AND m.title LIKE ? ";
-        $params[] = "%$search%";
+    {
+        return self::$pdo->query("SELECT COUNT(*) FROM movies")->fetchColumn();
     }
 
-    if ($author) {
-        $sql .= " AND m.author_id = ? ";
-        $params[] = $author;
+    public static function createFull($title, $desc, $year, $poster, $backdrop, $author_id)
+    {
+        $stmt = self::$pdo->prepare("
+            INSERT INTO movies (title, description, year, poster, backdrop, author_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+
+        $stmt->execute([$title, $desc, $year, $poster, $backdrop, $author_id]);
+
+        return self::$pdo->lastInsertId();
     }
 
-    if ($year) {
-        $sql .= " AND m.year = ? ";
-        $params[] = $year;
+    public static function filter($search, $category, $author, $year)
+    {
+        $sql = "
+            SELECT m.*, a.name AS author_name,
+                   GROUP_CONCAT(c.name SEPARATOR ', ') AS categories
+            FROM movies m
+            LEFT JOIN authors a ON a.id = m.author_id
+            LEFT JOIN movie_category mc ON mc.movie_id = m.id
+            LEFT JOIN categories c ON c.id = mc.category_id
+            WHERE 1
+        ";
+
+        $params = [];
+
+        if ($search) {
+            $sql .= " AND m.title LIKE ? ";
+            $params[] = "%$search%";
+        }
+
+        if ($author) {
+            $sql .= " AND m.author_id = ? ";
+            $params[] = $author;
+        }
+
+        if ($year) {
+            $sql .= " AND m.year = ? ";
+            $params[] = $year;
+        }
+
+        if ($category) {
+            $sql .= " AND mc.category_id = ? ";
+            $params[] = $category;
+        }
+
+        $sql .= " GROUP BY m.id ORDER BY m.id DESC ";
+
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    if ($category) {
-        $sql .= " AND mc.category_id = ? ";
-        $params[] = $category;
-    }
-
-    $sql .= " GROUP BY m.id ORDER BY m.id DESC ";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-
-    return $stmt->fetchAll();
-}
-
-public static function updateFull($id, $title, $desc, $year, $poster, $backdrop, $author_id)
+    public static function updateFull($id, $data)
 {
-    global $pdo;
-
-    // Nếu không upload ảnh mới thì giữ ảnh cũ
     $current = self::find($id);
 
-    if (!$poster)   $poster   = $current['poster'];
-    if (!$backdrop) $backdrop = $current['backdrop'];
+    $title        = $data["title"]        ?? $current["title"];
+    $description  = $data["description"]  ?? $current["description"];
+    $year         = $data["year"]         ?? $current["year"];
+    $release_date = $data["release_date"] ?? $current["release_date"];
+    $poster       = $data["poster"]       ?? $current["poster"];
+    $backdrop     = $data["backdrop"]     ?? $current["backdrop"];
+    $author_id    = $data["author_id"]    ?? $current["author_id"];
+    $rating       = $data["rating"]       ?? $current["rating"];
+    $duration     = $data["duration"]     ?? $current["duration"];
+    $trailer      = $data["trailer"]      ?? $current["trailer"];
 
-    $stmt = $pdo->prepare("
-        UPDATE movies 
-        SET title = ?, description = ?, year = ?, poster = ?, backdrop = ?, author_id = ?
+    $sql = "
+        UPDATE movies
+        SET 
+            title = ?, 
+            description = ?, 
+            year = ?, 
+            release_date = ?, 
+            poster = ?, 
+            backdrop = ?, 
+            author_id = ?, 
+            rating = ?, 
+            duration = ?, 
+            trailer = ?
         WHERE id = ?
-    ");
+    ";
 
-    return $stmt->execute([$title, $desc, $year, $poster, $backdrop, $author_id, $id]);
+    $stmt = self::$pdo->prepare($sql);
+
+    return $stmt->execute([
+        $title,
+        $description,
+        $year,
+        $release_date,
+        $poster,
+        $backdrop,
+        $author_id,
+        $rating,
+        $duration,
+        $trailer,
+        $id
+    ]);
+}
+
+    public static function recent($limit = 6)
+{
+    $stmt = self::$pdo->prepare("
+        SELECT *
+        FROM movies
+        ORDER BY id DESC
+        LIMIT ?
+    ");
+    $stmt->bindValue(1, $limit, \PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
 }

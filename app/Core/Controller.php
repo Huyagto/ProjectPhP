@@ -5,31 +5,39 @@ use Models\User;
 
 class Controller {
 
-    // Tự động lấy user đang đăng nhập
     protected function shareUser()
     {
-        if (!empty($_SESSION["user_id"])) {
-            return User::find($_SESSION["user_id"]);
-        }
-        return null;
+        return !empty($_SESSION["user_id"])
+            ? User::find($_SESSION["user_id"])
+            : null;
     }
 
-    // VIEW CHO USER
-    protected function view($path, $data = [])
+    protected function view($path, $data = [], $layout = "user")
     {
-        // Thêm currentUser vào view
+        // inject currentuser
         $data["currentUser"] = $this->shareUser();
 
-        extract($data);
-        require __DIR__ . '/../Views/' . $path . '.php';
+        // biến được truyền vào view, KHÔNG phá các biến quan trọng khác
+        foreach ($data as $key => $value) {
+            $$key = $value;
+        }
+
+        // Render view con
+        ob_start();
+        require __DIR__ . "/../Views/" . $path . ".php";
+        $content = ob_get_clean();
+
+        // Render layout (layout nhận biến: content + currentUser + title...)
+        require __DIR__ . "/../Views/layout/" . $layout . ".php";
     }
 
-    // VIEW CHO ADMIN
     protected function adminView($path, $data = [])
     {
         $data["currentUser"] = $this->shareUser();
 
-        extract($data);
+        foreach ($data as $key => $value) {
+            $$key = $value;
+        }
 
         ob_start();
         require __DIR__ . '/../Views/' . $path . '.php';

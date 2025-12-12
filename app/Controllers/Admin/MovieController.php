@@ -8,9 +8,6 @@ use Models\Author;
 
 class MovieController extends Controller
 {
-    /**
-     * Trang danh sách phim
-     */
    public function index()
 {
     $search   = $_GET["search"]   ?? "";
@@ -27,10 +24,6 @@ class MovieController extends Controller
         "keyword"    => $search
     ]);
 }
-
-    /**
-     * Hiển thị form thêm
-     */
     public function create()
     {
         return $this->adminView("admin/movies/create", [
@@ -38,10 +31,6 @@ class MovieController extends Controller
             "categories" => Category::all()
         ]);
     }
-
-    /**
-     * Lưu phim mới
-     */
     public function store()
     {
         $title        = $_POST["title"];
@@ -53,8 +42,6 @@ class MovieController extends Controller
         $trailer      = $_POST["trailer"];
         $author_id    = $_POST["author_id"];
         $categories   = $_POST["categories"] ?? [];
-
-        /* --- Upload poster --- */
         $poster = null;
         if (!empty($_FILES["poster"]["name"])) {
             $filename = time() . "_" . $_FILES["poster"]["name"];
@@ -64,8 +51,6 @@ class MovieController extends Controller
             );
             $poster = $filename;
         }
-
-        /* --- Upload backdrop --- */
         $backdrop = null;
         if (!empty($_FILES["backdrop"]["name"])) {
             $filename = time() . "_" . $_FILES["backdrop"]["name"];
@@ -75,8 +60,6 @@ class MovieController extends Controller
             );
             $backdrop = $filename;
         }
-
-        /* --- Lưu phim mới --- */
         $movie_id = Movie::createFull([
             "title"        => $title,
             "description"  => $desc,
@@ -89,16 +72,9 @@ class MovieController extends Controller
             "duration"     => $duration,
             "trailer"      => $trailer,
         ]);
-
-        /* --- Lưu thể loại --- */
         Movie::syncCategories($movie_id, $categories);
-
         return $this->redirect(BASE_URL . "/admin/movies");
     }
-
-    /**
-     * Hiển thị form chỉnh sửa
-     */
     public function edit($id)
     {
         return $this->adminView("admin/movies/edit", [
@@ -108,10 +84,6 @@ class MovieController extends Controller
             "selected"   => Movie::getCategories($id)
         ]);
     }
-
-    /**
-     * Cập nhật phim
-     */
     public function update($id)
     {
         $title        = $_POST["title"];
@@ -123,8 +95,6 @@ class MovieController extends Controller
         $trailer      = $_POST["trailer"];
         $author_id    = $_POST["author_id"];
         $categories   = $_POST["categories"] ?? [];
-
-        /* --- Upload poster mới nếu có --- */
         $poster = null;
         if (!empty($_FILES["poster"]["name"])) {
             $filename = time() . "_" . $_FILES["poster"]["name"];
@@ -134,8 +104,6 @@ class MovieController extends Controller
             );
             $poster = $filename;
         }
-
-        /* --- Upload backdrop mới nếu có --- */
         $backdrop = null;
         if (!empty($_FILES["backdrop"]["name"])) {
             $filename = time() . "_" . $_FILES["backdrop"]["name"];
@@ -145,29 +113,21 @@ class MovieController extends Controller
             );
             $backdrop = $filename;
         }
-
-        /* --- Cập nhật --- */
         Movie::updateFull($id, [
             "title"        => $title,
             "description"  => $desc,
             "year"         => $year,
             "release_date" => $release_date,
-            "poster"       => $poster,     // null → giữ ảnh cũ
-            "backdrop"     => $backdrop,   // null → giữ ảnh cũ
+            "poster"       => $poster,     
+            "backdrop"     => $backdrop,  
             "author_id"    => $author_id,
             "rating"       => $rating,
             "duration"     => $duration,
             "trailer"      => $trailer,
         ]);
-
         Movie::syncCategories($id, $categories);
-
         return $this->redirect(BASE_URL . "/admin/movies");
     }
-
-    /**
-     * Xóa phim
-     */
     public function delete($id)
     {
         Movie::delete($id);

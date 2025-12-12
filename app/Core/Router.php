@@ -8,64 +8,58 @@ class Router
     public static function handle()
     {
         $method = $_SERVER['REQUEST_METHOD'];
-
-        // Get real URI
         $rawUri = $_SERVER['REQUEST_URI'];
+
+        // Chuẩn hoá URI
         $uri = parse_url($rawUri, PHP_URL_PATH);
+        $scriptDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), "/");
 
-        // Remove /ProjectPhP/public dynamically
-       $scriptDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), "/");
-if ($scriptDir !== "") {
-    $uri = str_replace($scriptDir, "", $uri);
-}
+        if ($scriptDir !== "") {
+            $uri = str_replace($scriptDir, "", $uri);
+        }
 
-        // Normalize
         $uri = trim($uri, "/");
         $uri = preg_replace('/\/+/', '/', $uri);
 
-        // Debug
-        file_put_contents("route_debug.txt",
-            "\n--- CHECK FOR URI: $uri ---\n",
-            FILE_APPEND
-        );
-
-        // Loop routes
         foreach (Route::$routes as $route) {
-
-            file_put_contents("route_debug.txt",
-                "TRY: ".$route["method"]." ".$route["uri"]."\n",
-                FILE_APPEND
-            );
 
             if ($route["method"] !== $method) continue;
 
+            // Lấy tham số từ URL
             $params = [];
+            if (!Route::matchUri($route["uri"], $uri, $params)) continue;
 
-            if (Route::matchUri($route["uri"], $uri, $params)) {
-
-                file_put_contents("route_debug.txt",
-                    "--> MATCH SUCCESS: ".$route["uri"]." PARAMS=".json_encode($params)."\n",
-                    FILE_APPEND
-                );
-
-                // Middleware
-                if ($route["middleware"] === "admin") {
-                    AdminMiddleware::requireAdmin();
-                }
-
-                [$controller, $methodName] = explode("@", $route["action"]);
-                $controller = "\\Controllers\\" . $controller;
-
-                return call_user_func_array([new $controller, $methodName], $params);
+            // Middleware admin
+            if ($route["middleware"] === "admin") {
+                AdminMiddleware::requireAdmin();
             }
+
+            // Xử lý controller + method
+            [$controllerName, $methodName] = explode("@", $route["action"]);
+
+            // Hỗ trợ namespace con
+            // Ví dụ "Admin\\MovieController" → "Admin\MovieController"
+            $controllerName = str_replace("/", "\\", $controllerName);
+            $controllerName = str_replace("\\\\", "\\", $controllerName);
+
+            // Ghép namespace gốc
+            $controllerClass = "\\Controllers\\" . $controllerName;
+
+            if (!class_exists($controllerClass)) {
+                throw new \Exception("Controller not found: " . $controllerClass);
+            }
+
+            $controllerInstance = new $controllerClass();
+
+            if (!method_exists($controllerInstance, $methodName)) {
+                throw new \Exception("Method '$methodName' not found in controller: " . $controllerClass);
+            }
+
+            // Gọi controller method
+            return call_user_func_array([$controllerInstance, $methodName], $params);
         }
 
-        // No match found
-        file_put_contents("route_debug.txt",
-            "!!! NO ROUTE MATCH FOR: $uri\n",
-            FILE_APPEND
-        );
-
+        // 404 fallback
         http_response_code(404);
         echo "<h1 style='color:red;text-align:center;margin-top:50px;'>404 - Page Not Found</h1>";
     }

@@ -19,8 +19,6 @@ class CategoryController extends Controller {
         "keyword"    => $keyword
     ]);
 }
-
-
     public function create() {
         return $this->adminView("admin/categories/create");
     }

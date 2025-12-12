@@ -1,237 +1,280 @@
-/* ================================
-   RESET
-================================ */
+/* ===========================
+   GLOBAL RESET
+=========================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     background: #000;
     color: #fff;
-    font-family: "Roboto", Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
-/* ================================
-   HEADER – NAVBAR
-================================ */
-.header {
-    width: 100%;
-    background: rgba(0,0,0,0.9);
-    padding: 18px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-}
+/* ===========================
+   HERO (Netflix Cinematic Landing)
+=========================== */
 
-.header-logo {
-    color: #ff2020;
-    font-size: 28px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* USER TEXT */
-.header-user {
-    color: #fff;
-    margin-right: 10px;
-}
-
-/* NAV BUTTONS */
-.nav-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    color: #fff;
-    text-decoration: none;
-    margin-left: 8px;
-    font-size: 15px;
-    transition: 0.2s ease;
-}
-.nav-btn:hover {
-    opacity: 0.8;
-}
-
-.nav-login { background: #0d6efd; }
-.nav-register { background: #198754; }
-.nav-logout { background: #dc3545; }
-.nav-admin { background: #6c757d; }
-
-/* ================================
-   HERO SECTION
-================================ */
 .hero {
-    height: 70vh;
-    background: url('/public/assets/img/hero-bg.jpg') center/cover no-repeat;
+    width: 100%;
+    height: 88vh;
+    position: relative;
+
+    background-image: url("https://wallpapercave.com/wp/wp8814978.jpg");
+    background-size: 105%;
+    background-position: center top;
+    background-repeat: no-repeat;
+
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 20px;
+
+    padding-left: 80px;
+    padding-top: 120px; /* tránh header che */
+
+    color: #fff;
+    overflow: hidden;
+
+    animation: heroZoom 15s ease-in-out infinite alternate;
 }
 
+/* Cinematic gradient overlays */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.9)),
+        linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    z-index: 1;
+}
+
+/* Text block */
 .hero-content {
-    text-align: center;
-    max-width: 700px;
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    animation: heroFade 1s ease-out;
 }
 
 .hero-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 15px;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.75);
 }
 
-.hero-subtitle {
-    font-size: 20px;
-    color: #ccc;
+.hero-desc {
+    font-size: 23px;
+    opacity: 0.95;
+    margin-bottom: 30px;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.8);
 }
 
-.btn-primary {
-    background: #e50914;
-    color: white;
-    padding: 12px 28px;
-    border-radius: 5px;
+/* Buttons */
+.btn-row {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-play,
+.btn-info {
+    padding: 14px 32px;
+    border-radius: 6px;
     font-size: 18px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
-}
-.btn-primary:hover {
-    background: #b20710;
-}
-
-/* ================================
-   MOVIE GRID
-================================ */
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 22px;
-    padding: 30px 40px;
-}
-
-.movie-item {
-    position: relative;
+    font-weight: bold;
+    border: none;
     cursor: pointer;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform .25s ease;
-}
-.movie-item:hover {
-    transform: scale(1.12);
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.25s ease;
 }
 
-/* POSTER */
-.movie-item img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-radius: 8px;
+.btn-play {
+    background: #fff;
+    color: #000;
 }
 
-/* INFO OVERLAY ON HOVER */
-.movie-info {
+.btn-info {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    backdrop-filter: blur(5px);
+}
+
+.btn-play:hover {
+    background: #e6e6e6;
+    transform: scale(1.05);
+}
+
+.btn-info:hover {
+    background: rgba(255, 255, 255, 0.38);
+    transform: scale(1.05);
+}
+
+/* Fade bottom */
+.fade-bottom {
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    padding: 12px;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    opacity: 0;
-    transition: 0.3s;
-}
-.movie-item:hover .movie-info {
-    opacity: 1;
+    height: 200px;
+    background: linear-gradient(to top, #000, transparent);
+    z-index: 2;
 }
 
-.movie-title {
-    font-size: 16px;
-    font-weight: bold;
+/* Hero animations */
+@keyframes heroFade {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-.movie-year {
-    font-size: 13px;
-    color: #ccc;
+@keyframes heroZoom {
+    from { background-size: 105%; }
+    to   { background-size: 115%; }
 }
 
-/* ================================
-   CONTENT BLOCK
+/* ===============================
+   PUBLIC HEADER (Landing Page)
 ================================ */
-.content {
-    padding: 50px 40px;
+
+.site-header {
+    width: 100%;
+    padding: 18px 40px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0));
+    backdrop-filter: blur(2px);
 }
 
-.section-title {
+.header-container {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-logo {
     font-size: 32px;
+    font-weight: 900;
+    color: #e50914;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* Buttons (Login / Register) */
+.header-actions {
+    display: flex;
+    gap: 14px;
+}
+
+.btn-login,
+.btn-register {
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+/* Login button */
+.btn-login {
+    color: #fff;
+    border: 1px solid #aaa;
+}
+
+.btn-login:hover {
+    border-color: #fff;
+}
+
+/* Register button */
+.btn-register {
+    background: #e50914;
+    color: #fff;
+}
+
+.btn-register:hover {
+    background: #f6121d;
+}
+
+
+/* ===============================
+   FOOTER
+================================ */
+
+.site-footer {
+    background: #000;
+    padding: 50px 0 40px;
+    text-align: center;
+    border-top: 1px solid #222;
+    color: #ccc;
+    margin-top: 0; /* XÓA KHOẢNG TRẮNG thừa */
+}
+
+.footer-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.footer-brand {
+    font-size: 26px;
+    font-weight: bold;
+    color: #e50914;
     margin-bottom: 10px;
 }
 
-.section-text {
-    font-size: 18px;
-    color: #ccc;
+.footer-desc {
+    font-size: 15px;
+    margin-bottom: 22px;
+    color: #bbb;
 }
- .hero {
-        height: 80vh;
-        background: url('https://wallpapercave.com/wp/wp8814978.jpg') center/cover no-repeat;
-        position: relative;
-    }
-    .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.3), #000);
-    }
 
-    .hero-content {
-        position: absolute;
-        bottom: 120px;
-        left: 60px;
-        max-width: 550px;
-        z-index: 2;
-    }
+.footer-links {
+    margin-bottom: 20px;
+}
 
-    .hero-title {
-        font-size: 60px;
-        font-weight: 800;
-        margin-bottom: 15px;
-    }
-    .hero-desc {
-        font-size: 20px;
-        color: #ddd;
-        margin-bottom: 20px;
-    }
+.footer-links a {
+    color: #888;
+    margin: 0 12px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.25s;
+}
+.btn-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: #e50914;
+    color: white;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none; /* quan trọng */
+}
+.btn-row {
+    position: relative;
+    z-index: 10;
+}
 
-    .btn-row { display:flex; gap:10px; }
-    .btn-play, .btn-info {
-        padding: 12px 24px;
-        border-radius: 6px;
-        font-size: 18px;
-        cursor: pointer;
-        border: none;
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-    }
-    .btn-play { background: white; color: black; }
-    .btn-info { background: rgba(255,255,255,0.2); color: white; }
+.footer-links a:hover {
+    color: #fff;
+}
 
-    .fade-bottom {
-        width: 100%;
-        height: 200px;
-        position: absolute;
-        bottom: 0;
-        background: linear-gradient(to bottom, transparent, #000);
-    }
-/* ================================
-   FOOTER
-================================ */
-.footer {
-    text-align: center;
-    padding: 25px;
-    color: black;
-    border-top: 1px solid #222;
+.footer-copy {
+    font-size: 13px;
+    color: #666;
 }

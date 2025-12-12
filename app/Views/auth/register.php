@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 
 <h2 class="auth-title">Đăng ký</h2>
 
@@ -12,9 +11,10 @@
         <i class="fa fa-user"></i>
         <input type="text" name="username" placeholder="Tên đăng nhập" required>
     </div>
+
     <div class="input-group">
-        <i class="fa fa-display"></i>
-        <input type="text" name="display_name" placeholder="Tên Hiển Thị" required>
+        <i class="fa fa-id-card"></i>
+        <input type="text" name="display_name" placeholder="Tên hiển thị" required>
     </div>
 
     <div class="input-group">
@@ -31,9 +31,6 @@
 </form>
 
 <div class="bottom-text">
-    Đã có tài khoản?
+    Đã có tài khoản?  
     <a href="<?= BASE_URL ?>/login">Đăng nhập</a>
 </div>
-
-<?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layout/auth.php'; ?>

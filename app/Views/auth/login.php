@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 
 <h2 class="auth-title">Đăng nhập</h2>
 
@@ -25,6 +24,3 @@
     Bạn chưa có tài khoản?
     <a href="<?= BASE_URL ?>/register">Đăng ký ngay</a>
 </div>
-
-<?php $content = ob_get_clean(); ?>
-<?php include __DIR__ . '/../layout/auth.php'; ?>
