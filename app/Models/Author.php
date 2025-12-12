@@ -1,6 +1,6 @@
 <?php
 namespace Models;
-
+use PDO;
 class Author
 {
     public static function all()
@@ -16,11 +16,44 @@ class Author
         $stm->execute([$id]);
         return $stm->fetch();
     }
+public static function search($keyword)
+{
+    global $pdo;
 
+    $stmt = $pdo->prepare("SELECT * FROM authors WHERE name LIKE ?");
+    $stmt->execute(["%$keyword%"]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+    // Tạo author mới và trả về ID
     public static function create($name)
     {
         global $pdo;
-        return $pdo->prepare("INSERT INTO authors (name) VALUES (?)")->execute([$name]);
+        $stmt = $pdo->prepare("INSERT INTO authors (name) VALUES (?)");
+        $stmt->execute([$name]);
+        return $pdo->lastInsertId();
+    }
+
+    // Tìm theo tên → nếu không có thì tạo → trả về ID
+    public static function firstOrCreate($name)
+    {
+        if (!$name) return null;
+
+        global $pdo;
+
+        // Tìm
+        $stmt = $pdo->prepare("SELECT id FROM authors WHERE name = ?");
+        $stmt->execute([$name]);
+        $id = $stmt->fetchColumn();
+
+        if ($id) return $id;
+
+        // Tạo mới
+        $stmt = $pdo->prepare("INSERT INTO authors (name) VALUES (?)");
+        $stmt->execute([$name]);
+
+        return $pdo->lastInsertId();
     }
 
     public static function update($id, $name)
@@ -33,30 +66,14 @@ class Author
     {
         global $pdo;
 
-        // Xóa liên kết author với phim
-        $pdo->prepare("UPDATE movies SET author_id=NULL WHERE author_id=?")
-            ->execute([$id]);
+        // Clear liên kết giữa movie và author
+        $pdo->prepare("UPDATE movies SET author_id=NULL WHERE author_id=?")->execute([$id]);
 
         return $pdo->prepare("DELETE FROM authors WHERE id=?")->execute([$id]);
     }
-    public static function firstOrCreate($name)
-{
-    if (!$name) return null;
 
-    global $pdo;
-
-    $stmt = $pdo->prepare("SELECT id FROM authors WHERE name = ?");
-    $stmt->execute([$name]);
-    $id = $stmt->fetchColumn();
-
-    if ($id) return $id;
-
-    $pdo->prepare("INSERT INTO authors (name) VALUES (?)")->execute([$name]);
-    return $pdo->lastInsertId();
-}
-public static function count() {
-    global $pdo;
-    return $pdo->query("SELECT COUNT(*) FROM authors")->fetchColumn();
-}
-
+    public static function count() {
+        global $pdo;
+        return $pdo->query("SELECT COUNT(*) FROM authors")->fetchColumn();
+    }
 }

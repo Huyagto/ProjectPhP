@@ -3,43 +3,72 @@ namespace Services;
 
 class TMDBService
 {
-    private $apiKey = "af69a70274d4ddc4b8bd3ce03b195744";
+    private $apiKey = "d802cfd406636ac7ae568c66b8ff5652";
     private $baseUrl = "https://api.themoviedb.org/3";
 
-    // Gọi API chung
-    private function get($endpoint)
-    {
-        $url = $this->baseUrl . $endpoint . "&api_key=" . $this->apiKey;
+private function get($endpoint)
+{
+    $join = (str_contains($endpoint, '?')) ? "&" : "?";
+    $url = $this->baseUrl . $endpoint . $join . "api_key=" . $this->apiKey;
 
-        $json = @file_get_contents($url);
-        return $json ? json_decode($json, true) : null;
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL            => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_TIMEOUT        => 10
+    ]);
+
+    $response = curl_exec($curl);
+
+    if (curl_errno($curl)) {
+        file_put_contents("debug_api.txt", "cURL ERROR: " . curl_error($curl) . "\n", FILE_APPEND);
+        curl_close($curl);
+        return null;
     }
 
-    // Lấy danh sách phim phổ biến
+    curl_close($curl);
+
+    file_put_contents("debug_api.txt", "API OK: $url\n", FILE_APPEND);
+
+    return json_decode($response, true);
+}
+public function extractTrailerKey($videos)
+{
+    if (empty($videos["results"])) return null;
+
+    foreach ($videos["results"] as $v) {
+        if ($v["site"] === "YouTube" && $v["type"] === "Trailer") {
+            return $v["key"];
+        }
+    }
+
+    return null;
+}
+
+
     public function getPopularMovies($page = 1)
     {
         return $this->get("/movie/popular?language=vi-VN&page={$page}");
     }
 
-    // Lấy chi tiết phim
     public function getMovieDetail($movieId)
     {
         return $this->get("/movie/{$movieId}?language=vi-VN");
     }
 
-    // Lấy credits (để lấy đạo diễn)
     public function getMovieCredits($movieId)
     {
-        return $this->get("/movie/{$movieId}/credits?");
+        return $this->get("/movie/{$movieId}/credits"); // FIX
     }
 
-    // Lấy danh sách video (Trailer, Clip, Teaser) — *** HÀM BẠN THIẾU ***
     public function getMovieVideos($movieId)
     {
-        return $this->get("/movie/{$movieId}/videos?");
+        return $this->get("/movie/{$movieId}/videos"); // FIX
     }
 
-    // Lấy tên đạo diễn
     public function getDirector($credits)
     {
         if (empty($credits["crew"])) return null;
@@ -52,7 +81,6 @@ class TMDBService
         return null;
     }
 
-    // Parse genres → array tên
     public function getGenres($detail)
     {
         if (empty($detail["genres"])) return [];
@@ -60,7 +88,6 @@ class TMDBService
         return array_map(fn($g) => $g["name"], $detail["genres"]);
     }
 
-    // Lấy link poster TMDB
     public function getPosterUrl($path, $size = "w500")
     {
         if (!$path) return null;

@@ -1,0 +1,57 @@
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+cURL ERROR: Connection timed out after 10001 milliseconds
+cURL ERROR: Connection timed out after 10001 milliseconds
+API OK: https://api.themoviedb.org/3/movie/1242898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+cURL ERROR: Connection timed out after 10001 milliseconds
+cURL ERROR: Connection timed out after 10000 milliseconds
+cURL ERROR: Connection timed out after 10001 milliseconds
+cURL ERROR: Connection timed out after 10001 milliseconds
+cURL ERROR: Connection timed out after 10001 milliseconds
+cURL ERROR: Connection timed out after 10002 milliseconds
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1033462/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/1561955/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/755898/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/949709/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/949709/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/949709/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/949709/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/269149/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/269149/videos?api_key=d802cfd406636ac7ae568c66b8ff5652
+API OK: https://api.themoviedb.org/3/movie/269149/videos?api_key=d802cfd406636ac7ae568c66b8ff5652

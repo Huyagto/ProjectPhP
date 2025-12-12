@@ -16,6 +16,13 @@ function circleOffset($value)
     <h1 class="dashboard-title">
         <i class="fa-solid fa-chart-simple"></i> Thống kê hệ thống
     </h1>
+<button id="fetchBtn" class="fetch-btn">
+    <i class="fa-solid fa-cloud-arrow-down"></i> Fetch dữ liệu mới từ TMDB
+</button>
+
+<div id="toastBox"></div>
+
+
 
     <!-- GRID -->
     <div class="stats-grid">
@@ -109,20 +116,34 @@ function circleOffset($value)
     </div>
 
 </div>
+<?php
+$years = [];
+$counts = [];
+
+foreach ($movieStats as $row) {
+    $years[] = $row['year'];
+    $counts[] = $row['total'];
+}
+?>
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+const years = <?= json_encode($years) ?>;
+const movieCounts = <?= json_encode($counts) ?>;
+
 const ctx = document.getElementById('movieChart');
+
 new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+        labels: years,
         datasets: [{
-            label: "Số lượng phim",
-            data: [3, 5, 8, 12, 15, <?= $totalMovies ?>],
-            backgroundColor: "rgba(255, 50, 50, 0.7)"
+            label: "Số lượng phim theo năm",
+            data: movieCounts,
+            backgroundColor: "rgba(255, 60, 60, 0.8)",
+            borderRadius: 6,
         }]
     },
     options: {
@@ -132,3 +153,39 @@ new Chart(ctx, {
     }
 });
 </script>
+
+<script>
+function showToast(msg, type = "success") {
+    const wrap = document.getElementById("toastBox");
+    const toast = document.createElement("div");
+
+    toast.className = "toast" + (type === "error" ? " error" : "");
+    toast.textContent = msg;
+
+    wrap.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = 0;
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+document.getElementById("fetchBtn").onclick = function () {
+    const btn = document.getElementById("fetchBtn");
+    btn.classList.add("loading");
+
+    fetch("<?= BASE_URL ?>/admin/movies/fetch")
+        .then(res => res.json())
+        .then(data => {
+            btn.classList.remove("loading");
+            showToast("✔ " + data.message, "success");
+            setTimeout(() => location.reload(), 1200);
+        })
+        .catch(err => {
+            btn.classList.remove("loading");
+            showToast("❌ Lỗi fetch dữ liệu!", "error");
+            console.error(err);
+        });
+};
+</script>
+

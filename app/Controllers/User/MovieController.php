@@ -1,70 +1,75 @@
 <?php
 
 namespace Controllers\User;
-
+use Models\Watchlist;
 use Core\Controller;
 use Models\Movie;
-use Services\MovieService;
 use Services\TMDBService;
 
 class MovieController extends Controller
 {
-    private $movieService;
-
-    public function __construct()
-    {
-        $this->movieService = new MovieService();
-    }   
-
+    // LIST MOVIES TRANG USER
     public function index()
     {
-        $movies = $this->movieService->popular();
-        return $this->view("user/movies", ["movies" => $movies['results']]);
+        $movies = Movie::all();
+        return $this->view("user/movies", ["movies" => $movies]);
     }
 
-    public function detail($id)
-    {
-        // Lấy phim từ database
-        $movie = Movie::find($id);
+    // MOVIE DETAIL
+   public function detail($id)
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-        if (!$movie) {
-            die("Phim không tồn tại");
-        }
+    $movie = Movie::find($id);
+    if (!$movie) {
+        die("Phim không tồn tại");
+    }
 
-        // Lấy phim tương tự
-        $related_movies = Movie::getRelated($movie["categories"], $id);
+    // Phim tương tự 
+    $related = Movie::getRelated($movie["categories"], $id);
 
-        // ======= LẤY TRAILER TỪ TMDB =======
-        $tmdb = new TMDBService();
-        $videos = $tmdb->getMovieVideos($movie["tmdb_id"]);
+    // Lấy trailer từ TMDB
+    $tmdb = new TMDBService();
+    $videos = $tmdb->getMovieVideos($movie["tmdb_id"]);
 
-        $youtubeKey = null;
-
-        if (!empty($videos["results"])) {
-            foreach ($videos["results"] as $v) {
-                if ($v["site"] === "YouTube" && 
-                    ($v["type"] === "Trailer" || $v["type"] === "Teaser")) 
-                {
-                    $youtubeKey = $v["key"];
-                    break;
-                }
+    $youtubeKey = null;
+    if (!empty($videos["results"])) {
+        foreach ($videos["results"] as $v) {
+            if ($v["site"] === "YouTube" &&
+                ($v["type"] === "Trailer" || $v["type"] === "Teaser")) 
+            {
+                $youtubeKey = $v["key"];
+                break;
             }
         }
-
-        return $this->view("user/movie_detail", [
-            "movie" => $movie,
-            "related_movies" => $related_movies,
-            "youtubeKey" => $youtubeKey
-        ]);
     }
 
+    // 🔥 KIỂM TRA XEM PHIM ĐÃ ĐƯỢC THÊM VÀO WATCHLIST CHƯA
+    $isAdded = false;
+
+    if (!empty($_SESSION["user"]["id"])) {
+        $isAdded = Watchlist::exists($_SESSION["user"]["id"], $id);
+    }
+
+    return $this->view("user/movie_detail", [
+        "movie" => $movie,
+        "related_movies" => $related,
+        "youtubeKey" => $youtubeKey,
+        "isAdded" => $isAdded  // 🔥 GỬI SANG VIEW, KHÔNG LÀ BÁO LỖI!
+    ]);
+}
+
+
+    // SEARCH
     public function search()
     {
         $keyword = $_GET['q'] ?? '';
-        $result = $this->movieService->search($keyword);
+        $movies = Movie::search($keyword);
 
         return $this->view("user/search", [
-            "movies" => $result['results'],
+            "movies" => $movies,
             "keyword" => $keyword
         ]);
     }

@@ -12,6 +12,10 @@
         <i class="fa fa-user"></i>
         <input type="text" name="username" placeholder="Tên đăng nhập" required>
     </div>
+    <div class="input-group">
+        <i class="fa fa-display"></i>
+        <input type="text" name="display_name" placeholder="Tên Hiển Thị" required>
+    </div>
 
     <div class="input-group">
         <i class="fa fa-envelope"></i>

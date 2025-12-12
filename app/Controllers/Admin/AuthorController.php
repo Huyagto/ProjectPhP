@@ -6,10 +6,21 @@ use Models\Author;
 
 class AuthorController extends Controller {
 
-    public function index() {
-        $authors = Author::all();
-        return $this->adminView("admin/authors/index", compact('authors'));
-    }
+public function index()
+{
+    $keyword = $_GET["search"] ?? "";
+
+    $authors = $keyword 
+        ? Author::search($keyword)
+        : Author::all();
+
+    return $this->adminView("admin/authors/index", [
+        "authors" => $authors,
+        "keyword" => $keyword
+    ]);
+}
+
+
 
     public function create() {
         return $this->adminView("admin/authors/create");

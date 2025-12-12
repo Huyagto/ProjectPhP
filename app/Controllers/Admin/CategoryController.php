@@ -6,11 +6,20 @@ use Models\Category;
 
 class CategoryController extends Controller {
 
-    public function index() {
-        return $this->adminView("admin/categories/index", [
-            "categories" => Category::all()
-        ]);
-    }
+    public function index()
+{
+    $keyword = $_GET["search"] ?? "";
+
+    $categories = $keyword
+        ? Category::search($keyword)
+        : Category::all();
+
+    return $this->adminView("admin/categories/index", [
+        "categories" => $categories,
+        "keyword"    => $keyword
+    ]);
+}
+
 
     public function create() {
         return $this->adminView("admin/categories/create");

@@ -3,102 +3,70 @@ namespace Core;
 
 use Middleware\AdminMiddleware;
 
-class Router {
+class Router
+{
+    public static function handle()
+    {
+        $method = $_SERVER['REQUEST_METHOD'];
 
-    public static function handle() {
+        // Get real URI
+        $rawUri = $_SERVER['REQUEST_URI'];
+        $uri = parse_url($rawUri, PHP_URL_PATH);
 
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $publicPath = dirname($_SERVER['SCRIPT_NAME']);
-        $uri = trim(str_replace($publicPath, '', $uri), '/');
-
-        // ===========================
-        // PUBLIC ROUTES
-        // ===========================
-
-        if ($uri === '' || $uri === 'home') {
-            return (new \Controllers\HomeController())->index();
-        }
-
-        if ($uri === 'movies') {
-            return (new \Controllers\User\HomeController())->index();
-        }
-
-        if (preg_match('#^movie/(\d+)$#', $uri, $m)) {
-            return (new \Controllers\User\MovieController())->detail($m[1]);
-        }
-
-        if ($uri === 'search') {
-            return (new \Controllers\User\MovieController())->search();
-        }
-
-        // ===========================
-        // AUTH
-        // ===========================
-
-        if ($uri === 'login') {
-            $auth = new \Controllers\AuthController();
-            return $_SERVER['REQUEST_METHOD'] === 'POST'
-                ? $auth->login()
-                : $auth->showLogin();
-        }
-
-        if ($uri === 'register') {
-            $auth = new \Controllers\AuthController();
-            return $_SERVER['REQUEST_METHOD'] === 'POST'
-                ? $auth->register()
-                : $auth->showRegister();
-        }
-
-        if ($uri === 'logout') {
-            return (new \Controllers\AuthController())->logout();
-        }
-
-        // ===========================
-        // ADMIN ROUTES
-        // ===========================
-
-        if (strpos($uri, "admin") === 0) {
-            AdminMiddleware::requireAdmin();
-        }
-        if ($uri === 'user/home') {
-    return (new \Controllers\User\HomeController())->index();
+        // Remove /ProjectPhP/public dynamically
+       $scriptDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), "/");
+if ($scriptDir !== "") {
+    $uri = str_replace($scriptDir, "", $uri);
 }
 
-        if ($uri === 'admin') {
-            return (new \Controllers\Admin\DashboardController())->index();
+        // Normalize
+        $uri = trim($uri, "/");
+        $uri = preg_replace('/\/+/', '/', $uri);
+
+        // Debug
+        file_put_contents("route_debug.txt",
+            "\n--- CHECK FOR URI: $uri ---\n",
+            FILE_APPEND
+        );
+
+        // Loop routes
+        foreach (Route::$routes as $route) {
+
+            file_put_contents("route_debug.txt",
+                "TRY: ".$route["method"]." ".$route["uri"]."\n",
+                FILE_APPEND
+            );
+
+            if ($route["method"] !== $method) continue;
+
+            $params = [];
+
+            if (Route::matchUri($route["uri"], $uri, $params)) {
+
+                file_put_contents("route_debug.txt",
+                    "--> MATCH SUCCESS: ".$route["uri"]." PARAMS=".json_encode($params)."\n",
+                    FILE_APPEND
+                );
+
+                // Middleware
+                if ($route["middleware"] === "admin") {
+                    AdminMiddleware::requireAdmin();
+                }
+
+                [$controller, $methodName] = explode("@", $route["action"]);
+                $controller = "\\Controllers\\" . $controller;
+
+                return call_user_func_array([new $controller, $methodName], $params);
+            }
         }
 
-        $crudMap = [
-            "users"      => \Controllers\Admin\UserController::class,
-            "movies"     => \Controllers\Admin\MovieController::class,
-            "authors"    => \Controllers\Admin\AuthorController::class,
-            "categories" => \Controllers\Admin\CategoryController::class
-        ];
+        // No match found
+        file_put_contents("route_debug.txt",
+            "!!! NO ROUTE MATCH FOR: $uri\n",
+            FILE_APPEND
+        );
 
-        foreach ($crudMap as $name => $controller) {
-
-            if ($uri === "admin/$name") return (new $controller())->index();
-            if ($uri === "admin/$name/create") return (new $controller())->create();
-            if ($uri === "admin/$name/store") return (new $controller())->store();
-
-            if (preg_match("#^admin/$name/edit/(\d+)$#", $uri, $m)) {
-                return (new $controller())->edit($m[1]);
-            }
-
-            if (preg_match("#^admin/$name/update/(\d+)$#", $uri, $m)) {
-                return (new $controller())->update($m[1]);
-            }
-
-            if (preg_match("#^admin/$name/delete/(\d+)$#", $uri, $m)) {
-                return (new $controller())->delete($m[1]);
-            }
-        }
-
-        // ===========================
-        // 404
-        // ===========================
         http_response_code(404);
         echo "<h1 style='color:red;text-align:center;margin-top:50px;'>404 - Page Not Found</h1>";
-        exit;
     }
 }

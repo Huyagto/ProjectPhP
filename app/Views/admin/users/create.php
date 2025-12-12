@@ -3,7 +3,7 @@
 <div class="form-card">
     <h2 class="form-title"><i class="fa-solid fa-user-plus"></i> Thêm user</h2>
 
-    <form method="POST" class="admin-form">
+    <form action="<?= BASE_URL ?>/admin/users/store" method="POST">
 
         <label>Username:</label>
         <input type="text" name="username" class="input-parent" required>
@@ -13,7 +13,6 @@
 
         <label>Password:</label>
         <input type="password" name="password" class="input-parent" required>
-
         <label>Role:</label>
         <select name="role" class="input-parent">
             <option value="user">User</option>

@@ -1,0 +1,407 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "\/5h2EsPKNDdB3MAtOk9MB9Ycg9Rz.jpg",
+            "genre_ids": [
+                16,
+                35,
+                12,
+                10751,
+                9648
+            ],
+            "id": 1084242,
+            "original_language": "en",
+            "original_title": "Zootopia 2",
+            "overview": "Trong b\u1ed9 phim \"Zootopia 2 - Phi V\u1ee5 \u0110\u1ed9ng Tr\u1eddi 2\" t\u1eeb Walt Disney Animation Studios, hai th\u00e1m t\u1eed Judy Hopps (l\u1ed3ng ti\u1ebfng b\u1edfi Ginnifer Goodwin) v\u00e0 Nick Wilde (l\u1ed3ng ti\u1ebfng b\u1edfi Jason Bateman) b\u01b0\u1edbc v\u00e0o h\u00e0nh tr\u00ecnh truy t\u00ecm m\u1ed9t sinh v\u1eadt b\u00f2 s\u00e1t b\u00ed \u1ea9n v\u1eeba xu\u1ea5t hi\u1ec7n t\u1ea1i Zootopia v\u00e0 khi\u1ebfn c\u1ea3 v\u01b0\u01a1ng qu\u1ed1c \u0111\u1ed9ng v\u1eadt b\u1ecb \u0111\u1ea3o l\u1ed9n. \u0110\u1ec3 ph\u00e1 \u0111\u01b0\u1ee3c v\u1ee5 \u00e1n, Judy v\u00e0 Nick bu\u1ed9c ph\u1ea3i ho\u1ea1t \u0111\u1ed9ng b\u00ed m\u1eadt t\u1ea1i nh\u1eefng khu v\u1ef1c m\u1edbi l\u1ea1 c\u1ee7a th\u00e0nh ph\u1ed1 \u2013 n\u01a1i m\u1ed1i quan h\u1ec7 \u0111\u1ed3ng nghi\u1ec7p c\u1ee7a h\u1ecd b\u1ecb th\u1eed th\u00e1ch h\u01a1n bao gi\u1edd h\u1ebft.",
+            "popularity": 384.0829,
+            "poster_path": "\/5wXpOF9WPUKliIzNBdAqwAStLHU.jpg",
+            "release_date": "2025-11-26",
+            "title": "Phi V\u1ee5 \u0110\u1ed9ng Tr\u1eddi 2",
+            "video": false,
+            "vote_average": 7.684,
+            "vote_count": 526
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/1uCX0fpYOdvrTIYulFymWOP08HT.jpg",
+            "genre_ids": [
+                37,
+                28,
+                18
+            ],
+            "id": 785663,
+            "original_language": "en",
+            "original_title": "Old Henry",
+            "overview": "",
+            "popularity": 139.5589,
+            "poster_path": "\/eE1SL0QoDsvAMqQly56IkRtlN1W.jpg",
+            "release_date": "2021-10-01",
+            "title": "L\u00e3o Henry",
+            "video": false,
+            "vote_average": 7.273,
+            "vote_count": 638
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/min9ZUDZbiguTiQ7yz1Hbqk78HT.jpg",
+            "genre_ids": [
+                878,
+                12,
+                28
+            ],
+            "id": 533533,
+            "original_language": "en",
+            "original_title": "TRON: Ares",
+            "overview": "M\u1ed9t ch\u01b0\u01a1ng tr\u00ecnh tr\u00ed tu\u1ec7 nh\u00e2n t\u1ea1o si\u00eau vi\u1ec7t mang t\u00ean Ares \u0111\u01b0\u1ee3c g\u1eedi t\u1eeb th\u1ebf gi\u1edbi s\u1ed1 v\u00e0o th\u1ebf gi\u1edbi th\u1ef1c trong m\u1ed9t nhi\u1ec7m v\u1ee5 \u0111\u1ea7y nguy hi\u1ec3m \u2014 \u0111\u00e1nh d\u1ea5u l\u1ea7n \u0111\u1ea7u ti\u00ean nh\u00e2n lo\u1ea1i ti\u1ebfp x\u00fac tr\u1ef1c ti\u1ebfp v\u1edbi m\u1ed9t th\u1ef1c th\u1ec3 A.I. s\u1ed1ng \u0111\u1ed9ng.",
+            "popularity": 314.909,
+            "poster_path": "\/lj7imLGAzI3zKvbJtPH01aYW9lU.jpg",
+            "release_date": "2025-10-08",
+            "title": "Tr\u00f2 Ch\u01a1i \u1ea2o Gi\u00e1c: Ares",
+            "video": false,
+            "vote_average": 6.557,
+            "vote_count": 679
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/lZYMXx74pWmbj5Q5jp1QaMvmuuR.jpg",
+            "genre_ids": [
+                28,
+                14,
+                53
+            ],
+            "id": 1180831,
+            "original_language": "no",
+            "original_title": "Troll 2",
+            "overview": "Khi con qu\u1ef7 n\u00fai nguy hi\u1ec3m m\u1edbi t\u00e0n ph\u00e1 qu\u00ea nh\u00e0 c\u1ee7a h\u1ecd, Nora, Andreas v\u00e0 \u0110\u1ea1i \u00fay Kris d\u1ea5n th\u00e2n v\u00e0o nhi\u1ec7m v\u1ee5 nguy hi\u1ec3m nh\u1ea5t c\u1ee7a h\u1ecd t\u1eeb tr\u01b0\u1edbc \u0111\u1ebfn nay.",
+            "popularity": 332.688,
+            "poster_path": "\/plyEn5uDNXXDYihF8Z7YOe2PVKE.jpg",
+            "release_date": "2025-11-30",
+            "title": "Troll: Qu\u1ef7 n\u00fai kh\u1ed5ng l\u1ed3 2",
+            "video": false,
+            "vote_average": 6.79,
+            "vote_count": 231
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/bhhgVjnZ69ZoCGYvVT3djnAWSJA.jpg",
+            "genre_ids": [
+                27,
+                53
+            ],
+            "id": 1228246,
+            "original_language": "en",
+            "original_title": "Five Nights at Freddy's 2",
+            "overview": "M\u1ed9t n\u0103m sau c\u01a1n \u00e1c m\u1ed9ng si\u00eau nhi\u00ean t\u1ea1i ti\u1ec7m Pizza Freddy Fazbear, nh\u1eefng c\u00e2u chuy\u1ec7n xoay quanh s\u1ef1 ki\u1ec7n \u1ea5y \u0111\u00e3 b\u1ecb b\u00f3p m\u00e9o th\u00e0nh m\u1ed9t huy\u1ec1n tho\u1ea1i k\u1ef3 qu\u1eb7c t\u1ea1i \u0111\u1ecba ph\u01b0\u01a1ng, truy\u1ec1n c\u1ea3m h\u1ee9ng cho l\u1ec5 h\u1ed9i Fazfest \u0111\u1ea7u ti\u00ean c\u1ee7a th\u1ecb tr\u1ea5n. Kh\u00f4ng h\u1ec1 bi\u1ebft s\u1ef1 th\u1eadt b\u1ecb che gi\u1ea5u, Abby l\u00e9n tr\u1ed1n ra ngo\u00e0i \u0111\u1ec3 g\u1eb7p l\u1ea1i Freddy, Bonnie, Chica v\u00e0 Foxy \u2014 kh\u1edfi \u0111\u1ea7u cho chu\u1ed7i s\u1ef1 ki\u1ec7n kinh ho\u00e0ng, h\u00e9 l\u1ed9 b\u00ed m\u1eadt \u0111en t\u1ed1i v\u1ec1 ngu\u1ed3n g\u1ed1c th\u1eadt s\u1ef1 c\u1ee7a Freddy\u2019s, v\u00e0 \u0111\u00e1nh th\u1ee9c m\u1ed9t n\u1ed7i kinh ho\u00e0ng b\u1ecb ch\u00f4n v\u00f9i su\u1ed1t h\u00e0ng th\u1eadp k\u1ef7.",
+            "popularity": 287.7428,
+            "poster_path": "\/512e7sOroI5InisAXpPI1pqvcHG.jpg",
+            "release_date": "2025-12-03",
+            "title": "N\u0103m \u0110\u00eam Kinh Ho\u00e0ng 2",
+            "video": false,
+            "vote_average": 6.4,
+            "vote_count": 133
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/3k1PKmzNEosWFaOR1yC9ZKIYqmm.jpg",
+            "genre_ids": [
+                14,
+                16,
+                28,
+                878
+            ],
+            "id": 23527,
+            "original_language": "ru",
+            "original_title": "\u041f\u0435\u0440\u0432\u044b\u0439 \u043e\u0442\u0440\u044f\u0434",
+            "overview": "",
+            "popularity": 228.0554,
+            "poster_path": "\/mh2DUD5iHNs9VR8kxxJ8yVgZD0N.jpg",
+            "release_date": "2009-05-13",
+            "title": "\u041f\u0435\u0440\u0432\u044b\u0439 \u043e\u0442\u0440\u044f\u0434",
+            "video": false,
+            "vote_average": 6.233,
+            "vote_count": 131
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/w57nxiBIODAYHLRs1xmrCY9zEFe.jpg",
+            "genre_ids": [
+                28,
+                18,
+                14
+            ],
+            "id": 1083637,
+            "original_language": "kn",
+            "original_title": "\u0c95\u0cbe\u0c82\u0ca4\u0cbe\u0cb0: \u0c85\u0ca7\u0ccd\u0caf\u0cbe\u0caf - \u0ce7",
+            "overview": "",
+            "popularity": 224.1517,
+            "poster_path": "\/ehQPboTPaIMkMUOoNOh8e7pZ5Rp.jpg",
+            "release_date": "2025-10-01",
+            "title": "\u0c95\u0cbe\u0c82\u0ca4\u0cbe\u0cb0: \u0c85\u0ca7\u0ccd\u0caf\u0cbe\u0caf - \u0ce7",
+            "video": false,
+            "vote_average": 7,
+            "vote_count": 47
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/wNamNv018mUVvxuhxkubSuHI81.jpg",
+            "genre_ids": [
+                28,
+                18,
+                53
+            ],
+            "id": 1387382,
+            "original_language": "en",
+            "original_title": "Hunting Season",
+            "overview": "",
+            "popularity": 211.4322,
+            "poster_path": "\/cbryTyaWdqrKpQCw6K7zm2jrB5v.jpg",
+            "release_date": "2025-12-05",
+            "title": "Hunting Season",
+            "video": false,
+            "vote_average": 6.55,
+            "vote_count": 10
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/kfXgo2rMF1A19celCwLyQ4Xwpf8.jpg",
+            "genre_ids": [
+                16,
+                28,
+                10749,
+                14
+            ],
+            "id": 1218925,
+            "original_language": "ja",
+            "original_title": "\u5287\u5834\u7248 \u30c1\u30a7\u30f3\u30bd\u30fc\u30de\u30f3 \u30ec\u30bc\u7bc7",
+            "overview": "Ti\u1ebfp n\u1ed1i series anime chuy\u1ec3n th\u1ec3 \u0111\u00ecnh \u0111\u00e1m, Chainsaw Man l\u1ea7n \u0111\u1ea7u ti\u00ean oanh t\u1ea1c m\u00e0n \u1ea3nh r\u1ed9ng trong m\u1ed9t cu\u1ed9c phi\u00eau l\u01b0u ho\u00e0nh tr\u00e1ng, ng\u1eadp tr\u00e0n c\u00e1c ph\u00e2n c\u1ea3nh h\u00e0nh \u0111\u1ed9ng. \u1ede ph\u1ea7n tr\u01b0\u1edbc, ta \u0111\u00e3 bi\u1ebft Denji t\u1eebng l\u00e0m Th\u1ee3 S\u0103n Qu\u1ef7 cho yakuza \u0111\u1ec3 tr\u1ea3 m\u00f3n n\u1ee3 c\u1ee7a cha m\u1eb9 nh\u01b0ng b\u1ecb h\u1ecd ph\u1ea3n b\u1ed9i v\u00e0 tr\u1eeb kh\u1eed. Trong kho\u1ea3nh kh\u1eafc h\u1ea5p h\u1ed1i, ch\u00fa ch\u00f3 qu\u1ef7 c\u01b0a m\u00e1y Pochita (ng\u01b0\u1eddi b\u1ea1n \u0111\u1ed3ng h\u00e0nh trung th\u00e0nh c\u1ee7a Denji) \u0111\u00e3 \u0111\u01b0a ra m\u1ed9t kh\u1ebf \u01b0\u1edbc, c\u1ee9u s\u1ed1ng c\u1eadu v\u00e0 h\u1ee3p th\u1ec3 c\u00f9ng c\u1eadu. T\u1eeb \u0111\u00f3, m\u1ed9t Qu\u1ef7 C\u01b0a b\u1ea5t kh\u1ea3 chi\u1ebfn b\u1ea1i ra \u0111\u1eddi. Gi\u1edd \u0111\u00e2y \u1edf Chainsaw Man \u2013 The Movie: Ch\u01b0\u01a1ng Reze, trong cu\u1ed9c chi\u1ebfn t\u00e0n kh\u1ed1c gi\u1eefa qu\u1ef7 d\u1eef, th\u1ee3 s\u0103n qu\u1ef7 v\u00e0 nh\u1eefng k\u1ebb th\u00f9 trong b\u00f3ng t\u1ed1i, m\u1ed9t c\u00f4 g\u00e1i b\u00ed \u1ea9n t\u00ean Reze xu\u1ea5t hi\u1ec7n trong th\u1ebf gi\u1edbi c\u1ee7a Denji. Denji bu\u1ed9c ph\u1ea3i \u0111\u1ed1i m\u1eb7t v\u1edbi tr\u1eadn chi\u1ebfn sinh t\u1eed kh\u1ed1c li\u1ec7t nh\u1ea5t c\u1ee7a m\u00ecnh, m\u1ed9t tr\u1eadn chi\u1ebfn \u0111\u01b0\u1ee3c ti\u1ebfp s\u1ee9c b\u1edfi t\u00ecnh y\u00eau trong m\u1ed9t th\u1ebf gi\u1edbi n\u01a1i m\u1ecdi ng\u01b0\u1eddi ph\u1ea3i sinh t\u1ed3n m\u00e0 kh\u00f4ng bi\u1ebft b\u1ea5t k\u1ef3 lu\u1eadt l\u1ec7 n\u00e0o.",
+            "popularity": 197.2227,
+            "poster_path": "\/kywH6s7qTa64i0drx3pNvpQufWR.jpg",
+            "release_date": "2025-09-19",
+            "title": "Chainsaw Man - The Movie: Ch\u01b0\u01a1ng Reze",
+            "video": false,
+            "vote_average": 8.146,
+            "vote_count": 322
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/ebyxeBh56QNXxSJgTnmz7fXAlwk.jpg",
+            "genre_ids": [
+                28,
+                878,
+                12
+            ],
+            "id": 1242898,
+            "original_language": "en",
+            "original_title": "Predator: Badlands",
+            "overview": "Trong t\u01b0\u01a1ng lai, t\u1ea1i m\u1ed9t h\u00e0nh tinh h\u1ebbo l\u00e1nh, m\u1ed9t Predator non n\u1edbt - k\u1ebb b\u1ecb ch\u00ednh t\u1ed9c c\u1ee7a m\u00ecnh ru\u1ed3ng b\u1ecf - t\u00ecm th\u1ea5y m\u1ed9t \u0111\u1ed3ng minh kh\u00f4ng ng\u1edd t\u1edbi l\u00e0 Thia v\u00e0 b\u1eaft \u0111\u1ea7u h\u00e0nh tr\u00ecnh sinh t\u1eed nh\u1eb1m truy t\u00ecm k\u1ebb th\u00f9 t\u1ed1i th\u01b0\u1ee3ng. B\u1ed9 phim do Dan Trachtenberg - \u0111\u1ea1o di\u1ec5n c\u1ee7a Prey ch\u1ec9 \u0111\u1ea1o v\u00e0 n\u1eb1m trong chu\u1ed7i th\u01b0\u01a1ng hi\u1ec7u Qu\u00e1i Th\u00fa V\u00f4 H\u00ecnh Predator.",
+            "popularity": 161.2391,
+            "poster_path": "\/6aPy2tMgQLVz2IcifrL1Z2Q9u1t.jpg",
+            "release_date": "2025-11-05",
+            "title": "Qu\u00e1i Th\u00fa V\u00f4 H\u00ecnh: V\u00f9ng \u0110\u1ea5t Ch\u1ebft Ch\u00f3c",
+            "video": false,
+            "vote_average": 7.349,
+            "vote_count": 600
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/me3SisKfnxwBP69aOVKAVMw9vDM.jpg",
+            "genre_ids": [
+                28,
+                80,
+                53
+            ],
+            "id": 1149167,
+            "original_language": "en",
+            "original_title": "High Rollers",
+            "overview": "C\u1ed1t truy\u1ec7n xoay quanh Mason Goddard (John Travolta), m\u1ed9t si\u00eau tr\u1ed9m \u0111ang t\u1eadn h\u01b0\u1edfng cu\u1ed9c s\u1ed1ng m\u01a1 \u01b0\u1edbc c\u00f9ng \u0111\u1ed3ng \u0111\u1ed9i v\u00e0 ng\u01b0\u1eddi ph\u1ee5 n\u1eef anh y\u00eau, Amelia Decker (Gina Gershon). Tuy nhi\u00ean, khi k\u1ebb th\u00f9 kh\u00f4ng \u0111\u1ed9i tr\u1eddi chung l\u00e0 Salazar b\u1eaft c\u00f3c Decker, Mason bu\u1ed9c ph\u1ea3i th\u1ef1c hi\u1ec7n m\u1ed9t v\u1ee5 c\u01b0\u1edbp s\u00f2ng b\u1ea1c g\u1ea7n nh\u01b0 kh\u00f4ng th\u1ec3 \u0111\u1ec3 \u0111\u1ed5i l\u1ea5y s\u1ef1 t\u1ef1 do c\u1ee7a c\u00f4. Trong khi \u0111\u00f3, anh ph\u1ea3i \u0111\u1ed1i m\u1eb7t v\u1edbi c\u00e1c \u0111\u1ed1i th\u1ee7 t\u00e0n nh\u1eabn kh\u00e1c c\u1ee7a Salazar v\u00e0 s\u1ef1 truy \u0111u\u1ed5i g\u1eaft gao t\u1eeb FBI, \u0111\u1eb7t c\u01b0\u1ee3c t\u1ea5t c\u1ea3 \u0111\u1ec3 c\u1ee9u Decker.",
+            "popularity": 186.2374,
+            "poster_path": "\/hHowAaChDjwueySmwVbsjHmpWa.jpg",
+            "release_date": "2025-03-14",
+            "title": "Canh B\u1ea1c Cu\u1ed1i C\u00f9ng",
+            "video": false,
+            "vote_average": 6.4,
+            "vote_count": 76
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/lf8IZ86ajGpgbuyHCZrXUeAMmvy.jpg",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "id": 1033462,
+            "original_language": "zh",
+            "original_title": "749\u5c40",
+            "overview": "M\u1ed9t ch\u00e0ng trai tr\u1ebb b\u1ecb t\u1ed5n th\u01b0\u01a1ng v\u1edbi nh\u1eefng b\u1ea5t th\u01b0\u1eddng v\u1ec1 th\u1ec3 ch\u1ea5t bu\u1ed9c ph\u1ea3i gia nh\u1eadp m\u1ed9t v\u0103n ph\u00f2ng b\u00ed \u1ea9n \u0111\u1ec3 \u0111\u1ed1i m\u1eb7t v\u1edbi th\u1ea3m h\u1ecda lan r\u1ed9ng kh\u1eafp tr\u00e1i \u0111\u1ea5t do m\u1ed9t sinh v\u1eadt v\u00f4 danh g\u00e2y ra. Anh d\u1ea5n th\u00e2n v\u00e0o m\u1ed9t cu\u1ed9c phi\u00eau l\u01b0u kh\u00e1m ph\u00e1 nh\u1eefng b\u00ed \u1ea9n v\u1ec1 cu\u1ed9c \u0111\u1eddi m\u00ecnh.",
+            "popularity": 151.8802,
+            "poster_path": "\/xW640PVBXLlzhrkQnAcvWNsehIO.jpg",
+            "release_date": "2024-10-01",
+            "title": "C\u1ee5c 749",
+            "video": false,
+            "vote_average": 6.145,
+            "vote_count": 55
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/pAyImoslSnpMgjRwhaS5ZEdl8UI.jpg",
+            "genre_ids": [
+                28,
+                53,
+                80
+            ],
+            "id": 1448560,
+            "original_language": "en",
+            "original_title": "Wildcat",
+            "overview": "",
+            "popularity": 148.13,
+            "poster_path": "\/h893ImjM6Fsv5DFhKJdlZFZIJno.jpg",
+            "release_date": "2025-11-19",
+            "title": "Wildcat",
+            "video": false,
+            "vote_average": 6.1,
+            "vote_count": 36
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/4BtL2vvEufDXDP4u6xQjjQ1Y2aT.jpg",
+            "genre_ids": [
+                28,
+                80,
+                53
+            ],
+            "id": 1419406,
+            "original_language": "zh",
+            "original_title": "\u6355\u98ce\u8ffd\u5f71",
+            "overview": "Wong Tak-Chung, m\u1ed9t c\u1ef1u chuy\u00ean gia gi\u00e1m s\u00e1t \u0111\u01b0\u1ee3c bi\u1ebft \u0111\u1ebfn v\u1edbi kh\u1ea3 n\u0103ng ph\u00e2n t\u00edch d\u1eef li\u1ec7u v\u00e0 truy v\u1ebft b\u1eadc th\u1ea7y, b\u1ecb c\u1ea3nh s\u00e1t Ma Cao m\u1eddi tr\u1edf l\u1ea1i h\u1ee3p t\u00e1c \u0111i\u1ec1u tra sau khi xu\u1ea5t hi\u1ec7n h\u00e0ng lo\u1ea1t v\u1ee5 c\u01b0\u1edbp quy m\u00f4 l\u1edbn do m\u1ed9t t\u1ed5 ch\u1ee9c t\u1ed9i ph\u1ea1m c\u00f4ng ngh\u1ec7 cao th\u1ef1c hi\u1ec7n.",
+            "popularity": 149.3459,
+            "poster_path": "\/5LGUvRBXoXHsMZsZrCGBOVmwOVd.jpg",
+            "release_date": "2025-08-16",
+            "title": "B\u1ed5 Phong Truy \u1ea2nh",
+            "video": false,
+            "vote_average": 6.5,
+            "vote_count": 150
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/otSXrUWOTX7tTigLBMFKOV8n47r.jpg",
+            "genre_ids": [
+                27,
+                14,
+                10749
+            ],
+            "id": 1246049,
+            "original_language": "fr",
+            "original_title": "Dracula",
+            "overview": "M\u1ed9t ho\u00e0ng t\u1eed tuy\u1ec7t v\u1ecdng bi\u1ebfn th\u00e0nh Dracula v\u00e0 lang thang b\u1ea5t t\u1eadn qua th\u1eddi gian, s\u1ed1ng ch\u1ec9 v\u00ec l\u1eddi h\u1ee9a t\u00ecm l\u1ea1i t\u00ecnh y\u00eau c\u1ee7a \u0111\u1eddi m\u00ecnh.",
+            "popularity": 137.0464,
+            "poster_path": "\/vevuZVvb72VrbDzHiz4D8Z8XuGF.jpg",
+            "release_date": "2025-07-30",
+            "title": "Dracula: B\u1ea3n T\u00ecnh Ca B\u1ea5t Di\u1ec7t",
+            "video": false,
+            "vote_average": 7.117,
+            "vote_count": 585
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg",
+            "genre_ids": [
+                878,
+                53
+            ],
+            "id": 755898,
+            "original_language": "en",
+            "original_title": "War of the Worlds",
+            "overview": "Will Radford \u2014 chuy\u00ean gia ph\u00e2n t\u00edch an ninh m\u1ea1ng h\u00e0ng \u0111\u1ea7u c\u1ee7a B\u1ed9 An ninh N\u1ed9i \u0111\u1ecba \u2014 chuy\u00ean theo d\u00f5i c\u00e1c m\u1ed1i \u0111e d\u1ecda \u0111\u1ebfn an ninh qu\u1ed1c gia th\u00f4ng qua m\u1ed9t ch\u01b0\u01a1ng tr\u00ecnh gi\u00e1m s\u00e1t di\u1ec7n r\u1ed9ng. Nh\u01b0ng m\u1ed9t cu\u1ed9c t\u1ea5n c\u00f4ng b\u1ea5t ng\u1edd t\u1eeb m\u1ed9t th\u1ef1c th\u1ec3 b\u00ed \u1ea9n \u0111\u00e3 khi\u1ebfn anh b\u1eaft \u0111\u1ea7u nghi ng\u1edd: ph\u1ea3i ch\u0103ng ch\u00ednh ph\u1ee7 \u0111ang che gi\u1ea5u \u0111i\u1ec1u g\u00ec \u0111\u00f3\u2026 kh\u00f4ng ch\u1ec9 v\u1edbi anh m\u00e0 v\u1edbi to\u00e0n th\u1ebf gi\u1edbi?",
+            "popularity": 139.422,
+            "poster_path": "\/3e6GQvCA9hguxqfqA75BDvG7Vvp.jpg",
+            "release_date": "2025-07-29",
+            "title": "Cu\u1ed9c Chi\u1ebfn Gi\u1eefa C\u00e1c Th\u1ebf Gi\u1edbi",
+            "video": false,
+            "vote_average": 4.279,
+            "vote_count": 775
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/7cQjb8cRbRjF5tM5gOCnqsvC0iT.jpg",
+            "genre_ids": [
+                53
+            ],
+            "id": 1561955,
+            "original_language": "ta",
+            "original_title": "\u0bb8\u0bcd\u0b9f\u0bc0\u0baa\u0ba9\u0bcd",
+            "overview": "M\u1ed9t b\u00e1c s\u0129 t\u00e2m th\u1ea7n \u0111i\u1ec1u tra m\u1ed9t s\u00e1t nh\u00e2n h\u00e0ng lo\u1ea1t \u0111\u00e3 t\u1ef1 th\u00fa sau khi ch\u00edn c\u00f4 g\u00e1i m\u1ea5t t\u00edch, song r\u1ed1t cu\u1ed9c ph\u1ea3i \u0111\u1eb7t c\u00e2u h\u1ecfi li\u1ec7u h\u1eafn c\u00f3 t\u1ed9i hay l\u00e0 n\u1ea1n nh\u00e2n trong v\u00e1n c\u1edd \u0111en t\u1ed1i h\u01a1n.",
+            "popularity": 114.9405,
+            "poster_path": "\/yUURUJzeSTc47T2VeNw7nZwZ8VJ.jpg",
+            "release_date": "2025-12-05",
+            "title": "Stephen",
+            "video": false,
+            "vote_average": 6.8,
+            "vote_count": 3
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/8lqfrOBQ2EcY7znD3LxTYcvlh25.jpg",
+            "genre_ids": [
+                28,
+                80
+            ],
+            "id": 949709,
+            "original_language": "zh",
+            "original_title": "\u5371\u673a\u822a\u7ebf",
+            "overview": "Kh\u1ee7ng B\u1ed1 Tr\u00ean Kh\u00f4ng (High Forces) b\u1ed9 phim l\u00e0 c\u00e2u chuy\u1ec7n v\u1ec1 m\u1ed9t v\u1ee5 c\u01b0\u1edbp m\u00e1y bay v\u00e0 \u0111\u00f2i ti\u1ec1n chu\u1ed9c 3,5 t\u1ef7 nh\u00e2n d\u00e2n t\u1ec7 v\u1edbi t\u00ednh m\u1ea1ng h\u00e0nh kh\u00e1ch b\u1ecb \u0111e d\u1ecda. C\u00e2u chuy\u1ec7n ngh\u1eb9t th\u1edf tr\u00ean chuy\u1ebfn bay qu\u1ed1c t\u1ebf \u0111\u1ea7u ti\u00ean c\u1ee7a chi\u1ebfc A380 si\u00eau sang tr\u1ecdng, khi m\u00e1y bay b\u1ecb m\u1ed9t nh\u00f3m kh\u1ee7ng b\u1ed1 do t\u00ean tr\u00f9m Mike c\u1ea7m \u0111\u1ea7u c\u01b0\u1edbp.",
+            "popularity": 111.3485,
+            "poster_path": "\/b8xNJ39aOtEk3I7MFt8XJuN2bGS.jpg",
+            "release_date": "2024-09-29",
+            "title": "Kh\u1ee7ng B\u1ed1 Tr\u00ean Kh\u00f4ng",
+            "video": false,
+            "vote_average": 5.889,
+            "vote_count": 28
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/9tOkjBEiiGcaClgJFtwocStZvIT.jpg",
+            "genre_ids": [
+                16,
+                12,
+                10751,
+                35
+            ],
+            "id": 269149,
+            "original_language": "en",
+            "original_title": "Zootopia",
+            "overview": "Trong phim n\u00e0y, Zootopia l\u00e0 m\u1ed9t th\u00e0nh ph\u1ed1 k\u00ec l\u1ea1 kh\u00f4ng gi\u1ed1ng b\u1ea5t k\u00ec th\u00e0nh ph\u1ed1 n\u00e0o tr\u01b0\u1edbc \u0111\u00e2y c\u1ee7a h\u00e3ng Walt Disney s\u00e1ng ch\u1ebf. \u0110\u00e2y l\u00e0 khu \u0111\u00f4 th\u1ecb vui v\u1ebb c\u1ee7a c\u00e1c lo\u00e0i \u0111\u1ed9ng v\u1eadt, t\u1eeb voi, t\u00ea gi\u00e1c, cho \u0111\u1ebfn nh\u1eefng lo\u00e0i nh\u1ecf b\u00e9 nh\u01b0 chu\u1ed9t, th\u1ecf, c\u00fan. Cho \u0111\u1ebfn m\u1ed9t ng\u00e0y c\u00f4 c\u1ea3nh s\u00e1t th\u1ecf Judy Hopps xu\u1ea5t hi\u1ec7n, th\u00e0nh ph\u1ed1 Zootopia \u0111\u00e3 c\u00f3 nh\u1eefng thay \u0111\u1ed5i r\u1ea5t l\u00e0 kh\u00e1c. C\u00f4 c\u00f9ng ng\u01b0\u1eddi b\u1ea1n \u0111\u1ed3ng h\u00e0nh l\u00e0 ch\u00fa c\u00e1o \u0111\u1ea7y \u201cti\u1ec3u x\u1ea3o\u201d Nick Widle, \u0111\u00e3 c\u00f9ng nhau phi\u00eau l\u01b0u trong m\u1ed9t v\u1ee5 k\u1ef3 \u00e1n, v\u1edbi mong mu\u1ed1n thi\u1ebft l\u1eadp l\u1ea1i tr\u1eadt t\u1ef1 cho th\u00e0nh ph\u1ed1 zootopia.",
+            "popularity": 111.4683,
+            "poster_path": "\/oy5mQVAmswPFwLGsDFclJvlZRkc.jpg",
+            "release_date": "2016-02-11",
+            "title": "Phi V\u1ee5 \u0110\u1ed9ng Tr\u1eddi",
+            "video": false,
+            "vote_average": 7.8,
+            "vote_count": 17257
+        },
+        {
+            "adult": false,
+            "backdrop_path": "\/hpXBJxLD2SEf8l2CspmSeiHrBKX.jpg",
+            "genre_ids": [
+                18,
+                14,
+                27
+            ],
+            "id": 1062722,
+            "original_language": "en",
+            "original_title": "Frankenstein",
+            "overview": "Guillermo del Toro mang \u0111\u1ebfn phi\u00ean b\u1ea3n m\u1edbi \u0111\u1ea7y vi\u1ec5n ki\u1ebfn cho c\u00e2u chuy\u1ec7n gothic c\u1ee7a Mary Shelley v\u1ec1 m\u1ed9t nh\u00e0 khoa h\u1ecdc l\u1ed7i l\u1ea1c m\u00e0 ki\u00eau ng\u1ea1o b\u1ecb ch\u00ednh t\u1ea1o v\u1eadt bi th\u1ea3m c\u1ee7a m\u00ecnh h\u1ee7y ho\u1ea1i.",
+            "popularity": 106.9999,
+            "poster_path": "\/g4JtvGlQO7DByTI6frUobqvSL3R.jpg",
+            "release_date": "2025-10-17",
+            "title": "Frankenstein",
+            "video": false,
+            "vote_average": 7.771,
+            "vote_count": 2149
+        }
+    ],
+    "total_pages": 54135,
+    "total_results": 1082686
+}

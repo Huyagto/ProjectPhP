@@ -1,0 +1,54 @@
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/163
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/163
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/163
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/163
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/163
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/163
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/163
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/163
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/categories
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/categories
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/categories/edit/43
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/categories/edit/43
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/160
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/160
+
+--- REQUEST ---
+RAW: /ProjectPhP/public/admin/movies/edit/160
+SCRIPT_NAME: /ProjectPhP/public/index.php
+SCRIPT_DIR: /ProjectPhP/public
+AFTER CUT: admin/movies/edit/160
+

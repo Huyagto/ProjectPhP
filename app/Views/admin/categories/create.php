@@ -3,7 +3,7 @@
 <div class="form-card">
     <h2><i class="fa-solid fa-plus"></i> Thêm thể loại</h2>
 
-    <form method="POST">
+    <form action="<?= BASE_URL ?>/admin/categories/store" method="POST">
         <label>Tên thể loại:</label>
         <input type="text" name="name" class="input-parent" required>
 

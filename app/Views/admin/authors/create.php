@@ -5,7 +5,8 @@
 </div>
 
 <div class="form-card">
-    <form method="POST">
+    <form action="<?= BASE_URL ?>/admin/authors/store" method="POST">
+
 
         <label>Tên tác giả</label>
         <input class="input-parent" type="text" name="name" required>

@@ -129,10 +129,47 @@ body {
 .top10-card {
     position: relative;
 }
+.avatar-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.user-menu {
+    position: relative;
+    margin-left: 10px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    width: 160px;
+    padding: 10px 0;
+    z-index: 9999;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #222;
+}
 
 .top10-card img {
-    width: 125px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
     object-fit: cover;
 }
@@ -141,7 +178,7 @@ body {
     position: absolute;
     left: -20px;
     bottom: 0;
-    font-size: 120px;
+    font-size: 100px;
     font-weight: 900;
     color: black;
     -webkit-text-stroke: 4px white;

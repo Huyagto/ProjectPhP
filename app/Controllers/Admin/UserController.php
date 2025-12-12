@@ -6,48 +6,72 @@ use Models\User;
 
 class UserController extends Controller {
 
-    public function index() {
+    public function index()
+    {
+        $keyword = $_GET["search"] ?? "";
+
+        $users = $keyword
+            ? User::search($keyword)
+            : User::all();
+
         return $this->adminView("admin/users/index", [
-            "users" => User::all()
+            "users"   => $users,
+            "keyword" => $keyword
         ]);
     }
 
     public function create() {
         return $this->adminView("admin/users/create");
     }
-    public function edit($id)
-{
-    $user = User::find($id);
-    return $this->adminView("admin/users/edit", ['user' => $user]);
-}
 
-public function update($id)
-{
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $role = $_POST['role'];
+    public function store()
+    {
+        $username      = $_POST["username"];
+        $email         = $_POST["email"];
+        $password      = $_POST["password"];
+        $display_name  = $_POST["display_name"];
+        $role          = $_POST["role"];
 
-    User::update($id, [
-        'username' => $username,
-        'email' => $email,
-        'role' => $role
-    ]);
-
-    return $this->redirect(BASE_URL . "/admin/users");
-}
-    public function store() {
-
-        $username = $_POST["username"];
-        $email    = $_POST["email"];
-        $password = $_POST["password"];
-        $role     = $_POST["role"];
-
-        User::create($username, $email, $password, $role);
+        User::create($username, $email, $password, $display_name, $role);
 
         return $this->redirect(BASE_URL . "/admin/users");
     }
 
-    public function delete($id) {
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return $this->adminView("admin/users/edit", ['user' => $user]);
+    }
+
+    public function update($id)
+    {
+        $username      = $_POST['username'];
+        $email         = $_POST['email'];
+        $display_name  = $_POST['display_name'];
+        $role          = $_POST['role'];
+
+        // Avatar upload nếu có
+        $avatar = null;
+        if (!empty($_FILES["avatar"]["name"])) {
+            $fileName = time() . "_" . $_FILES["avatar"]["name"];
+            $avatar = "uploads/avatars/" . $fileName;
+
+            if (!is_dir("uploads/avatars")) {
+                mkdir("uploads/avatars", 0777, true);
+            }
+            move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar);
+        }
+
+        // Password mới?
+        $password = !empty($_POST['password']) ? $_POST["password"] : null;
+
+        User::update($id, $username, $email, $display_name, $password, $role, $avatar);
+
+        return $this->redirect(BASE_URL . "/admin/users");
+    }
+
+    public function delete($id)
+    {
         User::delete($id);
         return $this->redirect(BASE_URL . "/admin/users");
     }
