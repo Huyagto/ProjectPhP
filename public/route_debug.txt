@@ -19827,3 +19827,117 @@ TRY: GET movie/{id}
 TRY: GET search
 TRY: GET user/home
 --> MATCH SUCCESS: user/home PARAMS=[]
+
+--- CHECK FOR URI: user/profile ---
+TRY: GET 
+TRY: GET home
+TRY: GET movies
+TRY: GET movie/{id}
+TRY: GET search
+TRY: GET user/home
+TRY: GET user/movies
+TRY: GET user/movie/{id}
+TRY: POST user/profile/avatar
+TRY: GET user/profile
+--> MATCH SUCCESS: user/profile PARAMS=[]
+
+--- CHECK FOR URI: user/home ---
+TRY: GET 
+TRY: GET home
+TRY: GET movies
+TRY: GET movie/{id}
+TRY: GET search
+TRY: GET user/home
+--> MATCH SUCCESS: user/home PARAMS=[]
+
+--- CHECK FOR URI: user/home ---
+TRY: GET 
+TRY: GET home
+TRY: GET movies
+TRY: GET movie/{id}
+TRY: GET search
+TRY: GET user/home
+--> MATCH SUCCESS: user/home PARAMS=[]
+
+--- CHECK FOR URI: logout ---
+TRY: GET 
+TRY: GET home
+TRY: GET movies
+TRY: GET movie/{id}
+TRY: GET search
+TRY: GET user/home
+TRY: GET user/movies
+TRY: GET user/movie/{id}
+TRY: POST user/profile/avatar
+TRY: GET user/profile
+TRY: POST user/profile/update
+TRY: POST watchlist/add
+TRY: POST watchlist/delete
+TRY: POST watchlist/toggle
+TRY: GET admin/categories
+TRY: GET admin/categories/create
+TRY: POST admin/categories/store
+TRY: GET admin/categories/edit/{id}
+TRY: POST admin/categories/update/{id}
+TRY: GET admin/categories/delete/{id}
+TRY: GET admin/authors
+TRY: GET admin/authors/create
+TRY: POST admin/authors/store
+TRY: GET admin/authors/edit/{id}
+TRY: POST admin/authors/update/{id}
+TRY: GET admin/authors/delete/{id}
+TRY: GET admin/movies
+TRY: GET admin/movies/create
+TRY: POST admin/movies/store
+TRY: GET admin/movies/edit/{id}
+TRY: POST admin/movies/update/{id}
+TRY: GET admin/movies/delete/{id}
+TRY: GET user
+TRY: GET login
+TRY: POST login
+TRY: GET register
+TRY: POST register
+TRY: GET logout
+--> MATCH SUCCESS: logout PARAMS=[]
+
+--- CHECK FOR URI: login ---
+TRY: GET 
+TRY: GET home
+TRY: GET movies
+TRY: GET movie/{id}
+TRY: GET search
+TRY: GET user/home
+TRY: GET user/movies
+TRY: GET user/movie/{id}
+TRY: POST user/profile/avatar
+TRY: GET user/profile
+TRY: POST user/profile/update
+TRY: POST watchlist/add
+TRY: POST watchlist/delete
+TRY: POST watchlist/toggle
+TRY: GET admin/categories
+TRY: GET admin/categories/create
+TRY: POST admin/categories/store
+TRY: GET admin/categories/edit/{id}
+TRY: POST admin/categories/update/{id}
+TRY: GET admin/categories/delete/{id}
+TRY: GET admin/authors
+TRY: GET admin/authors/create
+TRY: POST admin/authors/store
+TRY: GET admin/authors/edit/{id}
+TRY: POST admin/authors/update/{id}
+TRY: GET admin/authors/delete/{id}
+TRY: GET admin/movies
+TRY: GET admin/movies/create
+TRY: POST admin/movies/store
+TRY: GET admin/movies/edit/{id}
+TRY: POST admin/movies/update/{id}
+TRY: GET admin/movies/delete/{id}
+TRY: GET user
+TRY: GET login
+--> MATCH SUCCESS: login PARAMS=[]
+
+--- CHECK FOR URI: home ---
+TRY: GET 
+TRY: GET home
+--> MATCH SUCCESS: home PARAMS=[]
