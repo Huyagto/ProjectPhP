@@ -24,24 +24,18 @@ class AuthController extends Controller {
             $user = User::findByLogin($login);
 
             if ($user && password_verify($password, $user['password'])) {
-
-                // ⭐ LƯU TOÀN BỘ THÔNG TIN USER CHUẨN SANG SESSION
                 $_SESSION["user"] = [
                     "id"           => $user["id"],
-                    "username"     => $user["username"],   // ⭐ BỔ SUNG QUAN TRỌNG
+                    "username"     => $user["username"],   
                     "display_name" => $user["display_name"],
                     "email"        => $user["email"],
                     "role"         => $user["role"],
                     "avatar"       => $user["avatar"] ?? "default-avatar.png"
                 ];
-
-                // ⭐ Nếu là admin thì chuyển hướng admin
                 if ($user['role'] == 'admin' || $user['role'] == 1) {
                     header("Location: " . BASE_URL . "/admin");
                     exit;
                 }
-
-                // ⭐ Người dùng bình thường
                 header("Location: " . BASE_URL . "/user/home");
                 exit;
             }
@@ -60,27 +54,37 @@ class AuthController extends Controller {
     }
 
     public function register() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $username     = trim($_POST["username"]);
-            $email        = trim($_POST["email"]);
-            $password     = trim($_POST["password"]);
-            $display_name = trim($_POST["display_name"]);
+        $username     = trim($_POST["username"]);
+        $email        = trim($_POST["email"]);
+        $password     = trim($_POST["password"]);
+        $display_name = trim($_POST["display_name"]);
 
-            if (User::exists($email, $username)) {
-                return $this->view("auth/register", [
-                    'error' => "Tên đăng nhập hoặc email đã tồn tại!"
-                ], "auth");
-            }
-
-            User::create($username, $email, $password, $display_name);
-
-            header("Location: " . BASE_URL . "/login");
-            exit;
+        // ❌ Password ngắn hơn 6 ký tự
+        if (strlen($password) < 6) {
+            return $this->view("auth/register", [
+                'error' => "Mật khẩu phải có ít nhất 6 ký tự!"
+            ], "auth");
         }
 
-        return $this->view("auth/register", [], "auth");
+        // ❌ Trùng username hoặc email
+        if (User::exists($email, $username)) {
+            return $this->view("auth/register", [
+                'error' => "Tên đăng nhập hoặc email đã tồn tại!"
+            ], "auth");
+        }
+
+        // ✅ Tạo user
+        User::create($username, $email, $password, $display_name);
+
+        header("Location: " . BASE_URL . "/login");
+        exit;
     }
+
+    return $this->view("auth/register", [], "auth");
+}
+
 
 
     public function logout() {

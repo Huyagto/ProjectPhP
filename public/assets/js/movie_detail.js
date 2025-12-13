@@ -1,4 +1,4 @@
-// Trailer
+
 function showTrailer() {
     const popup = document.getElementById("trailerPopup");
     const frame = document.getElementById("trailerFrame");
@@ -14,16 +14,12 @@ function closeTrailer() {
     popup.style.display = "none";
     frame.src = "";
 }
-
-// Toast
 function showToast(message) {
     const toast = document.getElementById("toast");
     toast.innerText = message;
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 2500);
 }
-
-// Watchlist toggle (FIXED)
 function toggleWatchlist(movieId) {
     fetch(baseUrl + "/watchlist/toggle", {
         method: "POST",
@@ -33,7 +29,7 @@ function toggleWatchlist(movieId) {
     .then(res => res.text())
     .then(result => {
 
-        result = result.trim();   // ⭐ CỰC KỲ QUAN TRỌNG
+        result = result.trim();  
 
         console.log("Server trả về:", result);
 

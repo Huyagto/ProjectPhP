@@ -5,7 +5,6 @@ use PDO;
 
 class User extends BaseModel
 {
-    /* Lấy tất cả users */
     public static function all()
 {
     return self::$pdo->query("
@@ -14,23 +13,17 @@ class User extends BaseModel
     ")->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-    /* Tìm theo ID */
     public static function find($id)
     {
         $stm = self::$pdo->prepare("SELECT * FROM users WHERE id = ?");
         $stm->execute([$id]);
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
-
-    /* Cập nhật avatar */
     public static function updateAvatar($id, $avatar)
     {
         $stm = self::$pdo->prepare("UPDATE users SET avatar=? WHERE id=?");
         return $stm->execute([$avatar, $id]);
     }
-
-    /* Tìm theo email */
     public static function findByEmail($email)
     {
         $stm = self::$pdo->prepare("SELECT * FROM users WHERE email = ?");
@@ -43,8 +36,6 @@ class User extends BaseModel
         $stm = self::$pdo->prepare("UPDATE users SET display_name=?, email=? WHERE id=?");
         return $stm->execute([$display_name, $email, $id]);
     }
-
-    /* Login bằng username hoặc email */
     public static function findByLogin($login)
     {
         $stm = self::$pdo->prepare("
@@ -55,8 +46,6 @@ class User extends BaseModel
         $stm->execute([$login, $login]);
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
-
-    /* Kiểm tra email hoặc username có tồn tại */
     public static function exists($email, $username)
     {
         $stm = self::$pdo->prepare("
@@ -68,13 +57,9 @@ class User extends BaseModel
         $stm->execute([$email, $username]);
         return $stm->fetchColumn() ? true : false;
     }
-
-    /* Tạo user mới */
     public static function create($username, $email, $password, $display_name, $role = "user")
     {
         $hashed = password_hash($password, PASSWORD_BCRYPT);
-
-        // Lấy avatar mặc định từ thư mục
         $defaultAvatars = glob(__DIR__ . "/../../public/assets/img/*.png");
 
         if (!$defaultAvatars || count($defaultAvatars) === 0) {
@@ -93,8 +78,6 @@ class User extends BaseModel
 
         return self::$pdo->lastInsertId();
     }
-
-    /* Cập nhật thông tin user */
     public static function update($id, $username, $email, $display_name, $password, $role, $avatar = null)
     {
         if ($password) {
@@ -128,8 +111,6 @@ class User extends BaseModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /* Cập nhật mật khẩu */
     public static function updatePassword($id, $newPassword)
     {
         $hashed = password_hash($newPassword, PASSWORD_BCRYPT);
@@ -137,30 +118,21 @@ class User extends BaseModel
         $stmt = self::$pdo->prepare("UPDATE users SET password=? WHERE id=?");
         return $stmt->execute([$hashed, $id]);
     }
-
-    /* Xóa user */
     public static function delete($id)
     {
-        // Xóa watchlist theo user → tránh dữ liệu rác
         self::$pdo->prepare("DELETE FROM watchlist WHERE user_id = ?")->execute([$id]);
 
         $stmt = self::$pdo->prepare("DELETE FROM users WHERE id = ?");
         return $stmt->execute([$id]);
     }
-
-    /* Kiểm tra mật khẩu nhập đúng không */
     public static function verifyPassword($plain, $hashed)
     {
         return password_verify($plain, $hashed);
     }
-
-    /* Kiểm tra admin */
     public static function isAdmin($user)
     {
         return isset($user["role"]) && $user["role"] === "admin";
     }
-
-    /* Đếm tổng số user */
     public static function count()
     {
         return self::$pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();

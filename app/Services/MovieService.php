@@ -5,7 +5,7 @@ use Models\Movie;
 use Models\Author;
 use Models\Category;
 use Models\BaseModel;
-use Services\TMDBService;   // <-- Cực kỳ quan trọng
+use Services\TMDBService;  
 use PDO;
 
 class MovieService

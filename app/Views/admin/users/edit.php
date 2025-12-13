@@ -6,8 +6,6 @@
         <i class="fa-solid fa-user-pen"></i>
         <span>Chỉnh sửa người dùng</span>
     </div>
-
-    <!-- SỬA QUAN TRỌNG: thêm action -->
     <form action="<?= BASE_URL ?>/admin/users/update/<?= $user['id'] ?>" 
           method="POST" enctype="multipart/form-data">
 
@@ -21,17 +19,6 @@
         <label>Display Name</label>
 <input type="text" name="display_name" class="input-parent" value="<?= $user['display_name'] ?>">
 
-<label>Avatar</label>
-<select name="avatar">
-    <?php foreach ($avatars as $av): ?>
-        <option value="<?= $av ?>" <?= $user['avatar'] === $av ? 'selected' : '' ?>>
-            <?= $av ?>
-        </option>
-    <?php endforeach; ?>
-</select>
-
-<img src="<?= BASE_URL ?>/assets/img/<?= $user["avatar"] ?>" 
-     style="width:80px;border-radius:50%;margin-top:10px;">
         <label>Password mới</label>
         <input type="password" name="password" class="input-parent" placeholder="Để trống nếu không đổi">
 
@@ -45,3 +32,12 @@
     </form>
 
 </div>
+<script>
+document.getElementById("avatarSelect").addEventListener("change", function () {
+    const avatar = this.value;
+
+    document.getElementById("avatarPreview").src =
+        "<?= BASE_URL ?>/img/" + avatar;
+});
+</script>
+

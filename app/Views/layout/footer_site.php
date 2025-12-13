@@ -1,3 +1,4 @@
+<?php require __DIR__ . "/lab_accordion.php"; ?>
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-brand">MOVIEFLIX</div>

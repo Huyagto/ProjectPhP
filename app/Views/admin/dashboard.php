@@ -1,7 +1,5 @@
 <?php
-ob_start(); // layout chính
-
-// Hàm tính vòng tròn
+ob_start();
 function circleOffset($value)
 {
     $max = 40;
@@ -121,71 +119,19 @@ $years = [];
 $counts = [];
 
 foreach ($movieStats as $row) {
-    $years[] = $row['year'];
+    $years[]  = $row['year'];
     $counts[] = $row['total'];
 }
 ?>
 
-<!-- Chart.js -->
+<script>
+    window.DASHBOARD_DATA = {
+        years: <?= json_encode($years) ?>,
+        movieCounts: <?= json_encode($counts) ?>,
+        fetchUrl: "<?= BASE_URL ?>/admin/movies/fetch"
+    };
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/admin.js"></script>
 
-<script>
-const years = <?= json_encode($years) ?>;
-const movieCounts = <?= json_encode($counts) ?>;
-
-const ctx = document.getElementById('movieChart');
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: years,
-        datasets: [{
-            label: "Số lượng phim theo năm",
-            data: movieCounts,
-            backgroundColor: "rgba(255, 60, 60, 0.8)",
-            borderRadius: 6,
-        }]
-    },
-    options: {
-        scales: {
-            y: { beginAtZero: true }
-        }
-    }
-});
-</script>
-
-<script>
-function showToast(msg, type = "success") {
-    const wrap = document.getElementById("toastBox");
-    const toast = document.createElement("div");
-
-    toast.className = "toast" + (type === "error" ? " error" : "");
-    toast.textContent = msg;
-
-    wrap.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.opacity = 0;
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-document.getElementById("fetchBtn").onclick = function () {
-    const btn = document.getElementById("fetchBtn");
-    btn.classList.add("loading");
-
-    fetch("<?= BASE_URL ?>/admin/movies/fetch")
-        .then(res => res.json())
-        .then(data => {
-            btn.classList.remove("loading");
-            showToast("✔ " + data.message, "success");
-            setTimeout(() => location.reload(), 1200);
-        })
-        .catch(err => {
-            btn.classList.remove("loading");
-            showToast("❌ Lỗi fetch dữ liệu!", "error");
-            console.error(err);
-        });
-};
-</script>
 

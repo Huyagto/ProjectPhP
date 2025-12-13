@@ -17,17 +17,11 @@ class MovieController extends Controller
     public function detail($id)
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
-
-        // Lấy phim
         $movie = Movie::find($id);
         if (!$movie) {
             die("Phim không tồn tại");
         }
-
-        // Lấy phim liên quan
         $related = Movie::getRelated($movie["categories"], $id);
-
-        // Lấy trailer từ TMDB
         $tmdb = new TMDBService();
         $videos = $tmdb->getMovieVideos($movie["tmdb_id"]);
 

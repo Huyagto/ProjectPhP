@@ -42,15 +42,20 @@ class UserController extends Controller {
         $email         = $_POST['email'];
         $display_name  = $_POST['display_name'];
         $role          = $_POST['role'];
-        $avatar = null;
-        if (!empty($_FILES["avatar"]["name"])) {
-            $fileName = time() . "_" . $_FILES["avatar"]["name"];
-            $avatar = "uploads/avatars/" . $fileName;
-            if (!is_dir("uploads/avatars")) {
-                mkdir("uploads/avatars", 0777, true);
-            }
-            move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar);
-        }
+       $avatar = null;
+
+if (!empty($_FILES["avatar"]["name"]) && $_FILES["avatar"]["error"] === UPLOAD_ERR_OK) {
+
+    $fileName = time() . "_" . basename($_FILES["avatar"]["name"]);
+    $uploadDir = __DIR__ . "/../../../public/img/";
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+    if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $uploadDir . $fileName)) {
+        $avatar = "img/" . $fileName;
+    }
+}
         $password = !empty($_POST['password']) ? $_POST["password"] : null;
         User::update($id, $username, $email, $display_name, $password, $role, $avatar);
         return $this->redirect(BASE_URL . "/admin/users");

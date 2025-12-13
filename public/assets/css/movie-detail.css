@@ -23,8 +23,6 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.95));
     z-index: 1;
 }
-
-/* HERO CONTENT */
 .hero-content {
     position: relative;
     z-index: 5;
@@ -43,8 +41,6 @@
     opacity: 0.9;
     margin: 15px 0 25px;
 }
-
-/* BUTTONS */
 .nf-btn {
     padding: 12px 26px;
     border-radius: 6px;
@@ -67,10 +63,6 @@
     background: rgba(255,255,255,0.2);
     color: white;
 }
-
-/* ===========================
-   TOAST MESSAGE
-=========================== */
 .toast {
     position: fixed;
     bottom: 40px;
@@ -89,10 +81,6 @@
     opacity: 1;
     bottom: 60px;
 }
-
-/* ===========================
-   TRAILER POPUP
-=========================== */
 .trailer-popup {
     position: fixed;
     inset: 0;
@@ -117,10 +105,6 @@
     cursor: pointer;
     color: white;
 }
-
-/* ===========================
-   DETAILS SECTION
-=========================== */
 .details-section {
     padding: 40px 60px;
     color: white;

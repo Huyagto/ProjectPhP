@@ -40,15 +40,11 @@ class Author extends BaseModel
     public static function firstOrCreate($name)
     {
         if (!$name) return null;
-
-        // kiểm tra tồn tại
         $stmt = self::$pdo->prepare("SELECT id FROM authors WHERE name = ?");
         $stmt->execute([$name]);
 
         $id = $stmt->fetchColumn();
         if ($id) return $id;
-
-        // tạo mới
         return self::create($name);
     }
 
@@ -64,14 +60,11 @@ class Author extends BaseModel
 
     public static function delete($id)
     {
-        // Các phim có author này → set NULL
         self::$pdo->prepare("
             UPDATE movies 
             SET author_id = NULL 
             WHERE author_id = ?
         ")->execute([$id]);
-
-        // Xóa tác giả
         $stmt = self::$pdo->prepare("DELETE FROM authors WHERE id = ?");
         return $stmt->execute([$id]);
     }

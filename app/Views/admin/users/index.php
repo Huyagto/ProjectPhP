@@ -23,7 +23,6 @@
                 <th>Username</th>
                 <th>Email</th>
                  <th>Display Name</th>
-                  <th>Avatar</th>
                 <th width="100">Role</th>
                 <th width="140">Hành động</th>
             </tr>
@@ -37,12 +36,6 @@
     <td><?= htmlspecialchars($u["email"]) ?></td>
 
     <td><?= htmlspecialchars($u["display_name"] ?? "-") ?></td>
-
-    <td>
-        <img src="<?= BASE_URL ?>/assets/img/<?= $u["avatar"] ?: 'default-avatar.png' ?>"
-             style="width:40px;height:40px;border-radius:50%;border:2px solid #e50914;">
-    </td>
-
     <td><?= $u["role"] ?></td>
 
                 <td class="action-cell">

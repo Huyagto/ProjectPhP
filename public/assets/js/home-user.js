@@ -90,16 +90,12 @@ function stopAutoSlide() {
         sliderInterval = null;
     }
 }
-
-// Init slider
 if (slides.length) {
     slides.forEach((s, i) => {
         if (s.classList.contains("active")) slideIndex = i;
     });
     startAutoSlide();
 }
-
-// Pause on hover
 const sliderEl = document.querySelector(".hero-slider");
 if (sliderEl) {
     sliderEl.addEventListener("mouseenter", stopAutoSlide);

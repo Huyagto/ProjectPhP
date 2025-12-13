@@ -9,10 +9,19 @@ class WatchlistController
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        if (empty($_SESSION["user_id"])) return;
+        if (empty($_SESSION["user"]["id"])) {
+            header("Location: /login");
+            exit;
+        }
 
-        Watchlist::add($_SESSION["user_id"], $_POST["movie_id"]);
-        header("Location: " . $_SERVER["HTTP_REFERER"]);
+        if (empty($_POST["movie_id"])) {
+            header("Location: " . ($_SERVER["HTTP_REFERER"] ?? "/"));
+            exit;
+        }
+
+        Watchlist::add($_SESSION["user"]["id"], $_POST["movie_id"]);
+
+        header("Location: " . ($_SERVER["HTTP_REFERER"] ?? "/"));
         exit;
     }
 
@@ -20,36 +29,45 @@ class WatchlistController
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        if (empty($_SESSION["user_id"])) return;
+        if (empty($_SESSION["user"]["id"])) {
+            header("Location: /login");
+            exit;
+        }
 
-        $userId = $_SESSION["user_id"];
-        $movieId = $_POST["movie_id"];
+        if (empty($_POST["movie_id"])) {
+            header("Location: " . ($_SERVER["HTTP_REFERER"] ?? "/"));
+            exit;
+        }
 
-        Watchlist::delete($userId, $movieId);
+        Watchlist::delete($_SESSION["user"]["id"], $_POST["movie_id"]);
 
-        header("Location: " . $_SERVER["HTTP_REFERER"]);
+        header("Location: " . ($_SERVER["HTTP_REFERER"] ?? "/"));
         exit;
     }
 
     public function toggle()
-{
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
-    if (empty($_SESSION["user"]["id"])) {
-        echo "not_logged_in";
-        return;
+        if (empty($_SESSION["user"]["id"])) {
+            echo "not_logged_in";
+            return;
+        }
+
+        if (empty($_POST["movie_id"])) {
+            echo "invalid";
+            return;
+        }
+
+        $userId  = $_SESSION["user"]["id"];
+        $movieId = $_POST["movie_id"];
+
+        if (Watchlist::exists($userId, $movieId)) {
+            Watchlist::delete($userId, $movieId);
+            echo "removed";
+        } else {
+            Watchlist::add($userId, $movieId);
+            echo "added";
+        }
     }
-
-    $userId = $_SESSION["user"]["id"];
-    $movieId = $_POST["movie_id"];
-
-    if (Watchlist::exists($userId, $movieId)) {
-        Watchlist::delete($userId, $movieId);
-        echo "removed";
-    } else {
-        Watchlist::add($userId, $movieId);
-        echo "added";
-    }
-}
-
 }

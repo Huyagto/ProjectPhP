@@ -5,11 +5,10 @@ use PDO;
 
 class Watchlist extends BaseModel
 {
-    /* Thêm phim vào watchlist (tự động bỏ qua nếu đã có) */
     public static function add($user_id, $movie_id)
     {
         if (self::exists($user_id, $movie_id)) {
-            return true; // Đã tồn tại -> không thêm nữa
+            return true; 
         }
 
         $stmt = self::$pdo->prepare("
@@ -19,8 +18,6 @@ class Watchlist extends BaseModel
 
         return $stmt->execute([$user_id, $movie_id]);
     }
-
-    /* Kiểm tra đã tồn tại hay chưa */
     public static function exists($user_id, $movie_id)
     {
         $stmt = self::$pdo->prepare("
@@ -33,8 +30,6 @@ class Watchlist extends BaseModel
 
         return $stmt->fetchColumn() ? true : false;
     }
-
-    /* Lấy danh sách phim user đã lưu (không có categories) */
     public static function getByUser($user_id)
     {
         $stmt = self::$pdo->prepare("
@@ -49,8 +44,6 @@ class Watchlist extends BaseModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /* Lấy watchlist chi tiết (gồm categories) */
     public static function getFullByUser($user_id)
     {
         $sql = "
@@ -71,8 +64,6 @@ class Watchlist extends BaseModel
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /* Xóa một phim khỏi watchlist */
     public static function delete($user_id, $movie_id)
     {
         $stmt = self::$pdo->prepare("
@@ -83,7 +74,6 @@ class Watchlist extends BaseModel
         return $stmt->execute([$user_id, $movie_id]);
     }
 
-    /* Toggle (thêm nếu chưa có, xóa nếu đã có) */
     public static function toggle($user_id, $movie_id)
     {
         if (self::exists($user_id, $movie_id)) {

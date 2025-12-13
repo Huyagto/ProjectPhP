@@ -15,7 +15,6 @@
 <div class="site-content">
     <?= $content ?>
 </div>
-
 <?php require __DIR__ . "/footer_site.php"; ?>
 
 </body>

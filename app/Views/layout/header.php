@@ -22,18 +22,13 @@ $currentUser = $currentUser ?? null;
             </span>
 
             <?php 
-                // Avatar luôn chỉ lưu tên file: avatar_cartoon_1.png
                 $avatar = $currentUser["avatar"] ?? "";
-
-                // Nếu avatar là tên file → gắn đúng đường dẫn public/assets/img/
                 if ($avatar && file_exists($_SERVER["DOCUMENT_ROOT"] . "/ProjectPhP/public/assets/img/" . $avatar)) {
                     $avatarUrl = BASE_URL . "/assets/img/" . $avatar;
                 } 
-                // Nếu avatar chứa full path
                 else if ($avatar && str_contains($avatar, "assets/img")) {
                     $avatarUrl = BASE_URL . "/" . ltrim($avatar, "/");
                 } 
-                // Fallback
                 else {
                     $avatarUrl = BASE_URL . "/assets/img/default-avatar.png";
                 }
