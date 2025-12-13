@@ -1,7 +1,7 @@
 <?php
 use Helpers\ImageHelper;
 ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 
 <div class="form-card">
 

@@ -46,4 +46,6 @@
    Route::get("admin/users/edit/{id}", "Admin\\UserController@edit", "admin");
    Route::post("admin/users/update/{id}", "Admin\\UserController@update", "admin");
    Route::get("admin/users/delete/{id}", "Admin\\UserController@delete", "admin");
+   Route::get("lab/open", "LabController@open");
+
 

@@ -6,7 +6,7 @@ $backdrop = $movie["backdrop"]
 $youtubeKey = $movie["trailer"] ?? null;
 ?>
 
-<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/movie_detail.css">
+<link rel="stylesheet" href="assets/css/movie_detail.css">
 
 <script>
 const youtubeTrailerUrl = "https://www.youtube.com/embed/<?= $youtubeKey ?>?autoplay=1";

@@ -8,7 +8,7 @@ function circleOffset($value)
     return 188 - (188 * $percent);
 }
 ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/admin-main.css">
+<link rel="stylesheet" href="assets/css/admin-main.css">
 <div class="dashboard-wrapper">
 
     <h1 class="dashboard-title">

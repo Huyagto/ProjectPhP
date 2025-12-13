@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 <div class="page-title-flex">
     <div class="page-title">
         <i class="fa-solid fa-tags"></i>

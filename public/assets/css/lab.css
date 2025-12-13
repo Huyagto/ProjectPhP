@@ -1,90 +1,56 @@
-/* ===== LAB WRAPPER ===== */
 .lab-wrapper {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
+    margin: 20px 0;
 }
 
-/* ===== TOGGLE BUTTON ===== */
 .lab-toggle {
-    background: #e50914;
-    color: #fff;
+    background: #0d6efd;
+    color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: bold;
 }
 
-/* ===== PANEL ===== */
 .lab-panel {
     display: none;
     margin-top: 12px;
-
-    width: 960px;          /* 🔥 RỘNG HẲN */
-    max-width: 92vw;       /* 🔒 không tràn màn hình nhỏ */
-    max-height: 78vh;
-
-    overflow-y: auto;
-
-    background: #111;
-    color: #fff;
-    border: 2px solid #e50914;
-    border-radius: 16px;
-    padding: 26px;
-    font-size: 15px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f9f9f9;
 }
 
-/* ===== TITLES ===== */
-.lab-panel h3 {
-    margin-top: 0;
-    color: #e50914;
-}
-
-/* ===== BUỔI ===== */
 .lab-item {
-    margin-top: 14px;
+    margin-bottom: 10px;
 }
 
 .lab-title {
+    font-weight: bold;
     cursor: pointer;
-    font-weight: 700;
-    color: #e50914;
-    font-size: 16px;
+    margin-bottom: 6px;
 }
 
-/* ===== FILE LIST ===== */
 .lab-buoi {
     display: none;
-    margin-top: 10px;
-    padding-left: 14px;
-    border-left: 3px solid #e50914;
+    padding-left: 15px;
 }
 
 .lab-buoi ul {
     list-style: none;
     padding-left: 0;
-    margin: 0;
-
-    column-count: 4;        /* 🔥 4 CỘT – RẤT ĐÃ */
-    column-gap: 28px;
 }
 
-.lab-buoi li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.lab-file {
+    margin: 4px 0;
+}
 
-    padding: 8px 12px;
-    margin-bottom: 6px;
+.lab-file a {
+    text-decoration: none;
+    color: #2c7be5;
+}
 
-    background: rgba(255,255,255,0.04);
-    border-radius: 8px;
-
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.lab-file a:hover {
+    text-decoration: underline;
+    color: #1a5fd0;
 }

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <base href="<?= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') ?>/">
     <meta charset="UTF-8">
     <title><?= $title ?? "MovieFlix Admin" ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/admin-main.css">
+    <link rel="stylesheet" href="assets/css/admin-main.css">
 </head>
 
 <body>

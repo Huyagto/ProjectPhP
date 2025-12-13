@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 <div class="form-card">
     <h2 class="form-title"><i class="fa-solid fa-user-plus"></i> Thêm user</h2>
 
