@@ -11,7 +11,7 @@
 </a>
 
             <button class="btn-info"><i class="fa-solid fa-circle-info"></i> Chi tiết</button>
-        </div>
+        </div>  
     </div>
 
     <div class="fade-bottom"></div>

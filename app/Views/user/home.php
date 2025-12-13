@@ -1,3 +1,7 @@
+<?php
+use Helpers\ImageHelper;
+?>
+
 <!-- =========================
      HERO SLIDER (NETFLIX)
 ========================== -->
@@ -5,22 +9,20 @@
 
 <?php foreach ($slider as $i => $movie): ?>
 
-    <?php
-        $bg = $movie["backdrop"]
-            ? "https://image.tmdb.org/t/p/original{$movie['backdrop']}"
-            : "https://image.tmdb.org/t/p/w500{$movie['poster']}";
-    ?>
-
     <div class="slide <?= $i === 0 ? 'active' : '' ?>"
-         style="background-image: url('<?= $bg ?>');">
+         style="background-image:url('<?= ImageHelper::backdrop($movie) ?>')">
 
         <div class="overlay"></div>
 
         <div class="slide-content">
-            <h1 class="slide-title"><?= htmlspecialchars($movie["title"]) ?></h1>
+            <h1 class="slide-title">
+                <?= htmlspecialchars($movie["title"]) ?>
+            </h1>
 
             <p class="slide-desc">
-                <?= htmlspecialchars(substr($movie["description"], 0, 130)) ?>...
+                <?= htmlspecialchars(
+                    mb_strimwidth($movie["description"] ?? '', 0, 130, "...")
+                ) ?>
             </p>
 
             <div class="slide-buttons">
@@ -45,7 +47,6 @@
 
 </div>
 
-
 <!-- =========================
      TOP 10
 ========================== -->
@@ -54,20 +55,14 @@
 <div class="top10-row">
 <?php foreach (array_slice($movies, 0, 10) as $i => $m): ?>
 
-    <?php
-        $poster = str_starts_with($m["poster"], "/")
-            ? "https://image.tmdb.org/t/p/w500{$m['poster']}"
-            : BASE_URL . "/uploads/" . $m["poster"];
-    ?>
-
     <div class="top10-card">
         <div class="rank"><?= $i + 1 ?></div>
-        <img src="<?= $poster ?>" alt="<?= htmlspecialchars($m['title']) ?>">
+        <img src="<?= ImageHelper::poster($m) ?>"
+             alt="<?= htmlspecialchars($m['title']) ?>">
     </div>
 
 <?php endforeach; ?>
 </div>
-
 
 <!-- =========================
      MOVIE GRID
@@ -78,26 +73,28 @@
 
 <?php foreach ($movies as $m): ?>
 
-    <?php
-        $poster = str_starts_with($m["poster"], "/")
-            ? "https://image.tmdb.org/t/p/w500{$m['poster']}"
-            : BASE_URL . "/uploads/" . $m["poster"];
-    ?>
-
     <a href="<?= BASE_URL ?>/movie/<?= $m['id'] ?>" class="movie-card">
-        <img src="<?= $poster ?>" alt="<?= htmlspecialchars($m['title']) ?>">
+
+        <img src="<?= ImageHelper::poster($m) ?>"
+             alt="<?= htmlspecialchars($m['title']) ?>">
 
         <div class="preview-popup">
-            <div class="movie-title"><?= $m['title'] ?></div>
-            <div class="movie-year"><?= $m['year'] ?></div>
-            <div class="movie-extra">⭐ <?= $m['rating'] ?? "Chưa có đánh giá" ?></div>
+            <div class="movie-title">
+                <?= htmlspecialchars($m['title']) ?>
+            </div>
+            <div class="movie-year">
+                <?= htmlspecialchars($m['year'] ?? '') ?>
+            </div>
+            <div class="movie-extra">
+                ⭐ <?= $m['rating'] ?? "Chưa có đánh giá" ?>
+            </div>
         </div>
+
     </a>
 
 <?php endforeach; ?>
 
 </div>
-
 
 <!-- =========================
      TRAILER POPUP
@@ -105,12 +102,14 @@
 <div id="trailerPopup" class="trailer-popup">
     <div class="trailer-box">
         <span class="close-btn">✖</span>
-        <iframe id="trailerFrame" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="trailerFrame"
+                width="100%"
+                height="400"
+                src=""
+                frameborder="0"
+                allowfullscreen>
+        </iframe>
     </div>
 </div>
 
-
-<!-- =========================
-     PAGE SCRIPTS
-========================== -->
 <script src="<?= BASE_URL ?>/assets/js/home-user.js"></script>

@@ -32,7 +32,7 @@ class AuthController extends Controller {
                     "role"         => $user["role"],
                     "avatar"       => $user["avatar"] ?? "default-avatar.png"
                 ];
-                if ($user['role'] == 'admin' || $user['role'] == 1) {
+                if ($user['role'] == 1) {
                     header("Location: " . BASE_URL . "/admin");
                     exit;
                 }
@@ -55,27 +55,20 @@ class AuthController extends Controller {
 
     public function register() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
         $username     = trim($_POST["username"]);
         $email        = trim($_POST["email"]);
         $password     = trim($_POST["password"]);
         $display_name = trim($_POST["display_name"]);
-
-        // ❌ Password ngắn hơn 6 ký tự
         if (strlen($password) < 6) {
             return $this->view("auth/register", [
                 'error' => "Mật khẩu phải có ít nhất 6 ký tự!"
             ], "auth");
         }
-
-        // ❌ Trùng username hoặc email
         if (User::exists($email, $username)) {
             return $this->view("auth/register", [
                 'error' => "Tên đăng nhập hoặc email đã tồn tại!"
             ], "auth");
         }
-
-        // ✅ Tạo user
         User::create($username, $email, $password, $display_name);
 
         header("Location: " . BASE_URL . "/login");
@@ -92,7 +85,7 @@ class AuthController extends Controller {
             session_start();
         }
         session_destroy();
-        header("Location: " . BASE_URL . "/login");
+        header("Location: " . BASE_URL . "/site/home");
         exit;
     }
 }
